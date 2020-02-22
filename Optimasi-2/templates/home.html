@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block page %}{{title}}{% endblock %}
+{% block content %}
+
+  <br>
+  <h3>{{my_string}}</h3>
+  
+  <p>Member</p>
+  <table class="table">
+      <thead>
+          <tr>
+              <th>Name</th>
+              <th>Address</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for n in data %}
+          <tr>
+          <td>{{n[1]}}</td>
+          <td>{{n[2]}}</td>
+          <td><a href="/update/{{n[0]}}">Update</a></td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+  <br>
+  <p>This timplate was rendered by {{time}}s</p>
+{% endblock %}
