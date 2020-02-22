@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hi, {{ current_user.username }}!</h1>
+
+    <hr>
+    {% for a in data %}
+    <p>
+    Nama <b>{{ a.nama }}</b>. NIM: <b>{{ a.nim }}</b> . Senin {{a.senin_e}}
+    </p>
+    {% endfor %}
+
+{% endblock %}

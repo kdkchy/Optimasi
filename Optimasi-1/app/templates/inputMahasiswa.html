@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Register</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.nama.label }}<br>
+            {{ form.nama(size=32) }}<br>
+            {% for error in form.nama.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.nim.label }}<br>
+            {{ form.nim(size=32) }}<br>
+            {% for error in form.nim.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <table cellspacing="20px" style="margin:center;">
+        <tr>
+            <td>{{ form.senin_a.label }}<br>
+                {{ form.senin_a(size=5) }}<br>
+                {% for error in form.senin_a.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+            <td>{{ form.senin_b.label }}<br>
+                {{ form.senin_b(size=5) }}<br>
+                {% for error in form.senin_b.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+            <td>{{ form.senin_d.label }}<br>
+                {{ form.senin_d(size=5) }}<br>
+                {% for error in form.senin_d.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+            <td>{{ form.senin_e.label }}<br>
+                {{ form.senin_e(size=5) }}<br>
+                {% for error in form.senin_e.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form.selasa_a.label }}<br>
+                {{ form.selasa_a(size=5) }}<br>
+                {% for error in form.selasa_a.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+            <td>{{ form.selasa_b.label }}<br>
+                {{ form.selasa_b(size=5) }}<br>
+                {% for error in form.selasa_b.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+            <td>{{ form.selasa_d.label }}<br>
+                {{ form.selasa_d(size=5) }}<br>
+                {% for error in form.selasa_d.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+            <td>{{ form.selasa_e.label }}<br>
+                {{ form.selasa_e(size=5) }}<br>
+                {% for error in form.selasa_e.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form.rabu_a.label }}<br>
+                {{ form.rabu_a(size=5) }}<br>
+                {% for error in form.rabu_a.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+            <td>{{ form.rabu_b.label }}<br>
+                {{ form.rabu_b(size=5) }}<br>
+                {% for error in form.rabu_b.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+            <td>{{ form.rabu_d.label }}<br>
+                {{ form.rabu_d(size=5) }}<br>
+                {% for error in form.rabu_d.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+            <td>{{ form.rabu_e.label }}<br>
+                {{ form.rabu_e(size=5) }}<br>
+                {% for error in form.rabu_e.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form.kamis_a.label }}<br>
+                {{ form.kamis_a(size=5) }}<br>
+                {% for error in form.kamis_a.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+            <td>{{ form.kamis_b.label }}<br>
+                {{ form.kamis_b(size=5) }}<br>
+                {% for error in form.kamis_b.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+            <td>{{ form.kamis_d.label }}<br>
+                {{ form.kamis_d(size=5) }}<br>
+                {% for error in form.kamis_d.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+            <td>{{ form.kamis_e.label }}<br>
+                {{ form.kamis_e(size=5) }}<br>
+                {% for error in form.kamis_e.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form.jumat_a.label }}<br>
+                {{ form.jumat_a(size=5) }}<br>
+                {% for error in form.jumat_a.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+            <td>{{ form.jumat_b.label }}<br>
+                {{ form.jumat_b(size=5) }}<br>
+                {% for error in form.jumat_b.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+            <td>{{ form.jumat_d.label }}<br>
+                {{ form.jumat_d(size=5) }}<br>
+                {% for error in form.jumat_d.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+            <td>{{ form.jumat_f.label }}<br>
+                {{ form.jumat_f(size=5) }}<br>
+                {% for error in form.jumat_f.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+        <hr>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
