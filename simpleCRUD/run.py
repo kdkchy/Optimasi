@@ -1,9 +1,10 @@
-from flask import Flask, jsonify, request,render_template
+from flask import Flask, jsonify, request,render_template, flash
 from pymongo import MongoClient
 import os
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 mongodb_host = os.environ.get('MONGO_HOST', 'localhost')
 mongodb_port = int(os.environ.get('MONGO_PORT', '27017'))
@@ -18,11 +19,11 @@ def home():
     
     for i in person:
         result.append(i)
-
     return render_template('home.html', my_string="Welcome Home!", title="Home", data=result)
 
 @app.route("/insert")
 def insert():
+
     return render_template(
         'insert.html', my_string="Let's insert some data!",
         title="Insert")
