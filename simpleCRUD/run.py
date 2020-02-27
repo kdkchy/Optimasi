@@ -17,9 +17,16 @@ def home():
     person = db.person.find()
     result = []
     
+
     for i in person:
         result.append(i)
-    return render_template('home.html', my_string="Welcome Home!", title="Home", data=result)
+
+    mahasiswa = db.mahasiswa.find()
+    mhs = []
+    for i in mahasiswa:
+        mhs.append(i)
+
+    return render_template('home.html', my_string="Welcome Home!", title="Home", data=result, matrix_1=mhs)
 
 @app.route("/insert")
 def insert():
