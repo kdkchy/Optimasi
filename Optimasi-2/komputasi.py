@@ -1,5 +1,7 @@
 from numpy import prod
+import pymongo
 from pymongo import MongoClient
+import pprint
 import os
 
 import json
@@ -10,24 +12,35 @@ mongodb_port = int(os.environ.get('MONGO_PORT', '27017'))
 client = MongoClient(mongodb_host, mongodb_port)   
 db = client.optimasi
 
-list = [
-    [[1,2,4],[1,3,1],[1,2,4],[0,2,4]],
-    [[1,3,1],[1,2,4],[0,3,1],[0,3,1]],
-    [[1,3,2],[0,3,2],[0,3,3],[0,3,3]],
-    [[0,3,3],[0,3,3],[0,3,2],[0,3,2]]
-    ]
-# print("Data : {}".format(list))
+result = list(db.dataPerson.find())
+list= []
+
+for i in range(len(result)):
+    dataTable = []
+
+    a = result[i]
+    dataTable.append(a.get('mhs'))
+    dataTable.append(a.get('dosbing'))
+    dataTable.append(a.get('p1'))
+    dataTable.append(a.get('p2'))
+
+    list.append(dataTable)
+
+pprint.pprint(list)
+print()
 
 hasil = []
 
 for j in range(len(list)):
     item = {}
-    # menghitung data pertama pada list
+    # menghitung data pertama pada list 
     data = j
 
+    """RUMUS"""
     # menghitung status
     hx = (list[data][0][0]+list[data][1][0]+list[data][2][0]+list[data][3][0])/4
 
+    """RUMUS"""
     # menghitung jam dan hari
     YZ = []
     for i in range(4):
@@ -35,50 +48,33 @@ for j in range(len(list)):
         YZ.append(result)
     YZprod = int(prod(YZ))
     
-
+    """RUMUS"""
+    # menghitung kasus akar
     for i in range(4):
         if (YZprod**(1/4) == 3*list[data][0][1]+5*list[data][0][2]):
             a = 0
         else:
             a = 1
-    
 
+    """RUMUS"""
+    # fungsi fitness
     f = 1/(a + hx + 1)
    
-
-    # print("data ke-{}".format(data+1))
-    # print("Hx = {}".format(hx))
-    # print("yz1-4 = {}".format(YZ))
-    # print("YZ = {}".format(YZprod))
-    # print(a)
-    # print(f)
-
-
     # print()
-    item.update([('status' , hx), ('jam dan hari' , YZ), ('hasil' , YZprod), ('kasus akar' , a),('fitness', f)])
+    item.update([('status' , hx), ('jam dan hari' , YZ), ('hasil' , YZprod), ('kasus akar' , a),('fitnes', f)])
     
     #data disimpan di databases
     db.komputasi.insert({'status': hx, 'jam dan hari' : YZ, 'hasil' : YZprod, 'kasus akar' : a, 'fitnes' : f})
 
+
     hasil.append(item)
-    print(item)
-    print()
+
+result = db.komputasi.find().sort("fitnes",pymongo.DESCENDING)
+
+hasilakhir = []
+for ulang in result:
+    hasilakhir.append(ulang)
 
 
-# json_object = json.loads(hasil)
-# json_formatted_str = json.dumps(json_object, indent=2)
-# print(hasil)
-
-# print()
-# hasil.insert(0, hasil[:])
-# pp = pprint.PrettyPrinter(width=41, compact=True)
-
-
-# print(type(hasil))
-# print(type(item))
-# pp.pprint(hasil)
-# print(type(hasilb))
-
-# print(hasilb)
-# print()
-# print(hasil)
+pprint.pprint(hasilakhir)
+db.komputasi.remove({})

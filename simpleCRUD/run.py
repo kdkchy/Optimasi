@@ -15,9 +15,8 @@ client = MongoClient(mongodb_host, mongodb_port)
 def home():
     db = client.rental 
     person = db.person.find()
-    result = []
     
-
+    result = []
     for i in person:
         result.append(i)
 
@@ -26,7 +25,14 @@ def home():
     for i in mahasiswa:
         mhs.append(i)
 
-    return render_template('home.html', my_string="Welcome Home!", title="Home", data=result, matrix_1=mhs)
+    db2 = client.optimasi
+
+    dataPerson = db2.dataPerson.find()
+    hasil = []
+    for i in dataPerson:
+        hasil.append(i)
+
+    return render_template('home.html', my_string="Welcome Home!", title="Home", data=result, matrix_1=mhs, matrix_2=hasil)
 
 @app.route("/insert")
 def insert():
