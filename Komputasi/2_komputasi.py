@@ -16,46 +16,6 @@ client = MongoClient(mongodb_host, mongodb_port)
 db = client.optimasi
 
 
-# ambil_dataPerson = list(db.dataPerson.find({"_id":ObjectId("5e5e0385ccabaf6a2c4a160a")}))
-# simpan_dataPerson = []
-
-# for i in range(len(ambil_dataPerson)):
-#     dataTable = []
-
-#     a = ambil_dataPerson[i]
-#     dataTable.append(a.get('senin_08'))
-#     dataTable.append(a.get('senin_10'))
-#     dataTable.append(a.get('senin_13'))
-#     dataTable.append(a.get('senin_15'))
-#     dataTable.append(a.get('selasa_08'))
-#     dataTable.append(a.get('selasa_10'))
-#     dataTable.append(a.get('selasa_13'))
-#     dataTable.append(a.get('selasa_15'))
-#     dataTable.append(a.get('rabu_08'))
-#     dataTable.append(a.get('rabu_10'))
-#     dataTable.append(a.get('rabu_13'))
-#     dataTable.append(a.get('rabu_15'))
-#     dataTable.append(a.get('kamis_08'))
-#     dataTable.append(a.get('kamis_10'))
-#     dataTable.append(a.get('kamis_13'))
-#     dataTable.append(a.get('kamis_15'))
-#     dataTable.append(a.get('jumat_08'))
-#     dataTable.append(a.get('jumat_10'))
-#     dataTable.append(a.get('jumat_13'))
-#     dataTable.append(a.get('jumat_15'))
-
-#     random.shuffle(dataTable)
-
-#     simpan_dataPerson.append(dataTable)
-# dataTable = []
-
-# for i in simpan_dataPerson[0]:
-#     dataTable.append(i)
-
-# pprint.pprint(dataTable)
-
-""""""
-
 result = list(db.temp.find())
 list = []
 
