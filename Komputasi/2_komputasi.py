@@ -17,7 +17,7 @@ db = client.optimasi
 
 
 result = list(db.temp.find())
-list = []
+my_list = []
 
 for i in range(len(result)):
     dataTable = []
@@ -28,36 +28,34 @@ for i in range(len(result)):
     dataTable.append(a.get('p1'))
     dataTable.append(a.get('p2'))
 
-    random.shuffle(dataTable)
+    my_list.append(dataTable)
 
-    list.append(dataTable)
-
-pprint.pprint(list)
+pprint.pprint(my_list)
 print()
 
 hasil = []
 
-for j in range(len(list)):
+for j in range(len(my_list)):
     item = {}
-    # menghitung data pertama pada list 
+    # menghitung data pertama pada my_list 
     data = j
 
     """RUMUS"""
     # menghitung status
-    hx = (list[data][0][0]+list[data][1][0]+list[data][2][0]+list[data][3][0])/4
+    hx = (my_list[data][0][0]+my_list[data][1][0]+my_list[data][2][0]+my_list[data][3][0])/4
 
     """RUMUS"""
     # menghitung jam dan hari
     YZ = []
     for i in range(4):
-        result = (3*list[data][i][1]+5*list[data][i][2])
+        result = (3*my_list[data][i][1]+5*my_list[data][i][2])
         YZ.append(result)
     YZprod = int(prod(YZ))
     
     """RUMUS"""
     # menghitung kasus akar
     for i in range(4):
-        if (YZprod**(1/4) == 3*list[data][0][1]+5*list[data][0][2]):
+        if (YZprod**(1/4) == 3*my_list[data][0][1]+5*my_list[data][0][2]):
             a = 0
         else:
             a = 1
@@ -75,7 +73,8 @@ for j in range(len(list)):
 
     hasil.append(item)
 
-result = db.komputasi.find().sort("fitnes",pymongo.DESCENDING)
+result = db.komputasi.find()
+# result = db.komputasi.find().sort("fitnes",pymongo.DESCENDING)
 
 hasilakhir = []
 for ulang in result:
@@ -84,3 +83,4 @@ for ulang in result:
 
 pprint.pprint(hasilakhir)
 db.komputasi.remove({})
+# db.temp.remove({})
