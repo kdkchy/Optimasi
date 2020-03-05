@@ -70,17 +70,26 @@ for j in range(len(my_list)):
     #data disimpan di databases
     db.komputasi.insert({'status': hx, 'jam dan hari' : YZ, 'hasil' : YZprod, 'kasus akar' : a, 'fitnes' : f})
 
-
+    db.temp.update({"id" : j}, {'$set' : {"fitness" : f}})
     hasil.append(item)
+   
 
-result = db.komputasi.find()
-# result = db.komputasi.find().sort("fitnes",pymongo.DESCENDING)
+result = db.temp.find().sort("fitness",pymongo.DESCENDING)
 
 hasilakhir = []
 for ulang in result:
     hasilakhir.append(ulang)
 
+print("Fitness tertinggi (table - temp)")
+pprint.pprint(hasilakhir)
 
+print("_____________________________________________________________")
+result = db.komputasi.find().sort("fitnes",pymongo.DESCENDING)
+
+hasilakhir = []
+for ulang in result:
+    hasilakhir.append(ulang)
+
+print("Fitness tertinggi (table - komputasi)")
 pprint.pprint(hasilakhir)
 db.komputasi.remove({})
-# db.temp.remove({})
