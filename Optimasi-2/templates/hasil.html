@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block page %}{{title}}{% endblock %}
+{% block content %}
+
+<br>
+<h3>{{my_string}}</h3>
+
+{% for i in data%}
+<li>{{i}}</li>
+{% endfor %}
+
+{% endblock %}

@@ -1,106 +1,63 @@
-from flask import Flask, render_template, request, url_for, g
-import mysql.connector as mariadb
-from werkzeug.urls import url_parse
-import time
+from flask import Flask, jsonify, request,render_template, flash
+from pymongo import MongoClient
+import os
+import pymongo
+from bson.objectid import ObjectId
+from komputasi.komputasi import getData, makeData
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-@app.errorhandler(404) 
-def not_found(e): 
-  return render_template("404.html", my_string="Ooppss! Page not found!", title="404"),404
-
-
-@app.before_request
-def before_request():
-    g.start = time.time()
-
-
-def after_request():
-    diff = time.time() - g.start
-    return diff
-
-def connect():
-    conn = mariadb.connect(
-        host="localhost",
-        user="root",
-        passwd="123",
-        database='rental'
-    )
-    return conn
-    
+mongodb_host = os.environ.get('MONGO_HOST', 'localhost')
+mongodb_port = int(os.environ.get('MONGO_PORT', '27017'))
+client = MongoClient(mongodb_host, mongodb_port)
+db = client.optimasi
 
 @app.route("/")
 def home():
 
-    conn = connect()
-    cur = conn.cursor()
-    sql = "SELECT * FROM members"
-    cur.execute(sql)
-    results = cur.fetchall()
-    data=[]
-    for i in results:
-        data.append(i)
+    jadwal = db.jadwal.find()
+    result = []
+    for i in jadwal:
+        result.append(i)
+
+    return render_template('home.html', my_string_1="Jadwal Skripsi", my_string_2="Jadwal Pra Skripsi", title="Beranda", data=result)
+
+@app.route("/rancang")
+def rancang():
+    dataMhs = db.dataMhs.find()
+    result = []
+    for i in dataMhs:
+        result.append(i)
+    # print(result)
+
+    dataDosen = db.dataDosen.find()
+    result_2 = []
+    for i in dataDosen:
+        result_2.append(i)
     return render_template(
-        'home.html', my_string="Welcome home!", title="Home", data=data, time=after_request())
+        'rancang.html', my_string="Mahasiswa",my_string_2="Dosen",
+        title="Rancang", data=result, data_2=result_2)
 
-@app.route("/insert")
-def insert():
-    return render_template(
-        'insert.html', my_string="Let's insert some data!",
-        title="Insert")
+@app.route('/actRancang', methods=['POST'])
+def actRancang():
+    clicked=None
+    if request.method == "POST":
+        clicked=request.json['data']
+    # print(clicked[0],clicked[1],clicked[2],clicked[3])
+    getData(clicked[0],clicked[1],clicked[2],clicked[3])
+    makeData()
+    return "Success"
 
-
-@app.route('/update/<int:id>')
-def update(id):
-
-    conn = connect()
-    cur = conn.cursor()
-    sql = "Select * from members where member_id='{}'".format(id)
-    cur.execute(sql)
-    results = cur.fetchall()
-    data=[]
-    for i in results:
-        data.append(i)
-    return render_template(
-        'update.html', my_string="You can also update your data directly.",
-        title="Update",data=data)
-
-
-@app.route("/actupdate", methods=['POST'])
-def actupdate():
-    if (request.method == 'POST'):
-        try:
-            id=request.form['id']
-            name=request.form['name']
-            address=request.form['address']
-            conn = connect()
-
-            cur = conn.cursor()
-            sql = "UPDATE members set name='{}', address='{}' where member_id='{}'".format(name,address,id)
-            cur.execute(sql)
-            conn.commit()
-            return render_template(
-                'msg.html', my_string="Data Has Been Updated.", title="Update")
-        except:
-            return render_template(
-                'msg.html', my_string="Databases Connection Error!", title="Update")
-
-@app.route("/act", methods=['POST'])
-def act():
-    if (request.method == 'POST'):
-        try:
-            name=request.form['name']
-            address=request.form['address']
-            conn = connect()
-            cur = conn.cursor()
-            sql = "INSERT INTO members(name,address) VALUES ('{}','{}')".format(name,address)
-            cur.execute(sql)
-            conn.commit()
-            return render_template(
-                'msg.html', my_string="Data Has Been Stored.", title="Insert")
-        except:
-            return render_template(
-                'msg.html', my_string="Databases Connection Error!", title="Insert")
+@app.route('/komputasi')
+def komputasi():
+    hitung = db.komputasi.find().sort("fitnes",pymongo.DESCENDING).limit(5)
+    result = []
+    for i in hitung:
+        result.append(i)
+    db.komputasi.remove({})
+    db.temp.remove({})
+    return render_template('hasil.html', my_string="Jadwal Tersedia",  title="Ketersediaan Jadwal", data=result)
 
 if __name__ == '__main__':
     app.run(debug=True)

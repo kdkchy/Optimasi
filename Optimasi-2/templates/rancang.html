@@ -1,0 +1,129 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block page %}{{title}}{% endblock %}
+{% block content %}
+
+<div class="text-center">
+	<div id="progress"></div>
+</div>
+
+<div id="exTab2" class="containerHome">
+<ul class="nav nav-tabs">
+			<li class="active">
+        <a  href="#1" data-toggle="tab">{{my_string}}</a>
+			</li>
+			<li><a href="#2" data-toggle="tab">{{my_string_2}}</a>
+			</li>
+		</ul>
+
+			<div class="tab-content">
+			  <div class="tab-pane active" id="1">
+          <br>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nama</th>
+                <th scope="col">NIM</th>
+                <th scope="col">*</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% set count = 1%}
+              {% for i in data%}
+              <tr>
+                <th scope="row">{{count}}</th>
+                {% set count = count + 1%}
+                <td>{{i.nama}}</td>
+                <td>{{i.nim}}</td>
+                <td><input type="checkbox" class="chk" value="{{i['_id']}}"></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+				<div class="tab-pane" id="2">
+          <br>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nama</th>
+                <th scope="col">*</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% set count = 1%}
+              {% for j in data_2%}
+              <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{j.nama}}</td>
+                <td><input type="checkbox" class="chk" value="{{j['_id']}}"></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+			</div>
+  </div>
+
+<input type="button" id="getValue" class="btn btn-primary" value="Rancang slur!">
+
+<div id="output"></div>
+
+{% endblock %}
+{% block script %}
+<script>
+  $(document).ready(function(){
+      $('#getValue').click(function(){
+          // Declare a checkbox array
+          var chkArray = [];
+
+
+          // Look for all checkboxes that have a specific class and was checked
+          $(".chk:checked").each(function() {
+              chkArray.push($(this).val());
+          });
+
+          // Join the array separated by the comma
+          var selected;
+          selected = chkArray.join(',') ;
+
+					let bar = new ProgressBar.Line(progress, {
+					  strokeWidth: 3,
+					  easing: 'easeInOut',
+					  duration: 1400,
+					  color: '#FFEA82',
+					  trailColor: '#eee',
+					  trailWidth: 1,
+					  svgStyle: {width: '100%', height: '100%'}
+					});
+
+
+          // Check if there are selected checkboxes
+          if(chkArray.length == 4){
+
+						bar.animate(1.0);  // Number from 0.0 to 1.0
+
+            $.ajax({
+              type : 'POST',
+              url : "{{url_for('actRancang')}}",
+              contentType: 'application/json;charset=UTF-8',
+              data: JSON.stringify({'data':chkArray}),
+							success: function (data) {
+					        window.location.replace("/komputasi");
+					    },
+					    error: function () {
+					        alert('error happened');
+					    }
+            });
+										// window.location.replace("/hasil")
+              // alert("Selected checkboxes value: " + selected);
+          }else{
+              alert("Please select at least one checkbox.");
+          }
+          });
+  });
+
+</script>
+{% endblock %}
