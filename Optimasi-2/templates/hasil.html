@@ -6,8 +6,50 @@
 <br>
 <h3>{{my_string}}</h3>
 
-{% for i in data%}
-<li>{{i}}</li>
-{% endfor %}
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col" rowspan="2" scope="row"></th>
+      <th scope="col">Mahasiswa</th>
+      <th scope="col">Dosen Pembimbing</th>
+      <th scope="col">Penguji 1</th>
+      <th scope="col">Penguji 2</th>
+      <th scope="col" rowspan="2" scope="row">Ruangan</th>
+      <th scope="col" rowspan="2" scope="row">Judul</th>
+      <th scope="col" rowspan="2" scope="row">*</th>
+    </tr>
+    <tr>
+      <th scope="col">{{dataMhs.nama}}</th>
+      <th scope="col">{{dataPembimbing.nama}}</th>
+      <th scope="col">{{dataPenguji_1.nama}}</th>
+      <th scope="col">{{dataPenguji_2.nama}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in data%}
+    <tr>
+      <form action="/actinsert" method="POST">
+      <th scope="row">{{loop.index}}</th>
+      <td> {{i.mhs}} <input type="hidden" class="form-control" name="mhs" value="{{i.mhs}}"></td>
+      <td> {{i.dosbing}} <input type="hidden" class="form-control" name="dosbing" value="{{i.dosbing}}"></td>
+      <td> {{i.p1}} <input type="hidden" class="form-control" name="dosbing" value="{{i.p1}}"></td>
+      <td> {{i.p2}} <input type="hidden" class="form-control" name="dosbing" value="{{i.p2}}"></td>
+      <td>
+      <select class="form-control" id="ruang" name="ruang">
+        <option value="1">1</option>
+      </select>
+      </td>
+      <td>
+          <div class="form-group">
+            <textarea name="judul" class="form-control" rows="4" name="judul"></textarea>
+          </div>
+      </td>
+      <td><input type="submit" class="btn btn-primary" value="Rancang slur!"></td>
+      </form>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 
 {% endblock %}

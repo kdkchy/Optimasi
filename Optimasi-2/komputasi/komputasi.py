@@ -82,17 +82,24 @@ def makeData():
                     # menghitung jam dan hari
                     YZ = []
                     for i in range(4):
-                        result = (3*my_list[data][i][1]+5*my_list[data][i][2])
+                        result = ((3*my_list[data][i][1])+(5*my_list[data][i][2]))
                         YZ.append(result)
                     YZprod = int(prod(YZ))
 
                     """RUMUS"""
                     # menghitung kasus akar
-                    for i in range(4):
-                        if (YZprod**(1/4) == 3*my_list[data][0][1]+5*my_list[data][0][2]):
-                            a = 0
-                        else:
-                            a = 1
+                    # for i in range(4):
+                    if (int(YZprod**(1/4)) == int((3*my_list[data][0][1])+(5*my_list[data][0][2]))):
+                        a = 0
+                    else:
+                        a = 1
+                    # print(my_list)
+                    # print(a)
+                    # for i in range(4):
+                    #     if (int(YZprod**(1/4)) == YZ[i]):
+                    #         a = a + 0
+                    #     else:
+                    #         a = 1
 
                     """RUMUS"""
                     # fungsi fitness
@@ -100,7 +107,7 @@ def makeData():
                     if f >= 0.8 :
                         # sama.append(my_list[data])
                         print(my_list[data])
-                        db.komputasi.insert({'mhs': my_list[data][0], 'dosbing' : my_list[data][1], 'p1' : my_list[data][2], 'p2' : my_list[data][3], 'fitnes' : f})
+                        db.komputasi.insert({'mhs': my_list[data][0], 'dosbing' : my_list[data][1], 'p1' : my_list[data][2], 'p2' : my_list[data][3], 'YZ' : YZ, 'fitnes' : f})
 
                 temp = my_list[0][3]
                 for i in range(19):
