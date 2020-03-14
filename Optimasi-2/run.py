@@ -44,13 +44,14 @@ def actRancang():
     clicked=None
     if request.method == "POST":
         clicked=request.json['data']
-    # print(clicked[0],clicked[1],clicked[2],clicked[3])
     getData(clicked[0],clicked[1],clicked[2],clicked[3])
     makeData()
+
     return "Success"
 
 @app.route('/komputasi')
 def komputasi():
+    # print(actRancang().clicked)
     hitung = db.komputasi.find().sort("fitnes",pymongo.DESCENDING).limit(5)
     result = []
     for i in hitung:
