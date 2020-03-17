@@ -5,3 +5,5 @@
 5. (Table - TEMP - UPDATE) Simpan data dalam tabel, sesuai fitness yang paling tinggi (BELUM)
 6. Loop  pada langkah 4
 7. Loop berhenti ketika sudah menemukan fitness yang bernilai 1
+
+edited
