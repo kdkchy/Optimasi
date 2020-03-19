@@ -6,4 +6,8 @@
 6. Loop  pada langkah 4
 7. Loop berhenti ketika sudah menemukan fitness yang bernilai 1
 
-edited
+requirements
+1. mongodb
+2. pip Flask
+3. pip pymongo
+4. pip numpy

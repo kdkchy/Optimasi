@@ -10,7 +10,7 @@ import json
 
 mongodb_host = os.environ.get('MONGO_HOST', 'localhost')
 mongodb_port = int(os.environ.get('MONGO_PORT', '27017'))
-client = MongoClient(mongodb_host, mongodb_port)   
+client = MongoClient(mongodb_host, mongodb_port)
 db = client.optimasi
 
 result = list(db.temp.find())
@@ -27,6 +27,28 @@ for i in range(len(result)):
 
     my_list.append(dataTable)
 
+# my_list = [[[1.0, 5.0, 3.0], [0.0, 5.0, 3.0], [0.0, 2.0, 1.0], [0.0, 4.0, 1.0]],
+#             [[0.0, 4.0, 4.0], [0.0, 4.0, 4.0], [1.0, 4.0, 1.0], [0.0, 1.0, 2.0]],
+#             [[0.0, 2.0, 1.0], [1.0, 2.0, 3.0], [1.0, 1.0, 1.0], [1.0, 3.0, 4.0]],
+#             [[1.0, 5.0, 4.0], [1.0, 1.0, 4.0], [1.0, 3.0, 4.0], [0.0, 5.0, 4.0]],
+#             [[0.0, 1.0, 1.0], [1.0, 5.0, 4.0], [1.0, 2.0, 4.0], [0.0, 1.0, 4.0]],
+#             [[0.0, 4.0, 1.0], [1.0, 3.0, 4.0], [1.0, 5.0, 4.0], [1.0, 2.0, 3.0]],
+#             [[1.0, 1.0, 3.0], [0.0, 4.0, 1.0], [1.0, 4.0, 3.0], [0.0, 2.0, 1.0]],
+#             [[0.0, 3.0, 3.0], [0.0, 3.0, 3.0], [0.0, 5.0, 1.0], [1.0, 4.0, 3.0]],
+#             [[1.0, 2.0, 2.0], [0.0, 5.0, 1.0], [1.0, 3.0, 3.0], [1.0, 1.0, 3.0]],
+#             [[1.0, 2.0, 4.0], [1.0, 2.0, 2.0], [0.0, 1.0, 3.0], [0.0, 5.0, 1.0]],
+#             [[0.0, 2.0, 3.0], [1.0, 1.0, 1.0], [0.0, 5.0, 3.0], [0.0, 2.0, 4.0]],
+#             [[1.0, 3.0, 4.0], [1.0, 4.0, 2.0], [1.0, 2.0, 2.0], [0.0, 5.0, 3.0]],
+#             [[1.0, 3.0, 1.0], [0.0, 2.0, 1.0], [1.0, 5.0, 2.0], [1.0, 4.0, 4.0]],
+#             [[0.0, 1.0, 2.0], [0.0, 1.0, 2.0], [1.0, 3.0, 2.0], [1.0, 3.0, 2.0]],
+#             [[1.0, 4.0, 2.0], [0.0, 4.0, 3.0], [0.0, 2.0, 3.0], [1.0, 3.0, 3.0]],
+#             [[1.0, 5.0, 1.0], [1.0, 3.0, 2.0], [1.0, 3.0, 1.0], [1.0, 1.0, 1.0]],
+#             [[1.0, 3.0, 2.0], [1.0, 3.0, 1.0], [0.0, 4.0, 2.0], [0.0, 3.0, 1.0]],
+#             [[1.0, 1.0, 4.0], [1.0, 5.0, 2.0], [1.0, 1.0, 4.0], [1.0, 4.0, 2.0]],
+#             [[1.0, 5.0, 2.0], [0.0, 1.0, 3.0], [0.0, 1.0, 2.0], [1.0, 5.0, 2.0]],
+#             [[0.0, 4.0, 3.0], [1.0, 2.0, 4.0], [0.0, 4.0, 4.0], [0.0, 2.0, 2.0]]]
+#
+
 num = 1
 for j in range(20):
     for k in range(20):
@@ -34,7 +56,7 @@ for j in range(20):
             # pprint.pprint(my_list)
             """LOGIC GOES HERE"""
             for j in range(len(my_list)):
-                # menghitung data pertama pada my_list 
+                # menghitung data pertama pada my_list
                 data = j
 
                 """RUMUS"""
@@ -48,14 +70,15 @@ for j in range(20):
                     result = (3*my_list[data][i][1]+5*my_list[data][i][2])
                     YZ.append(result)
                 YZprod = int(prod(YZ))
-                
+
                 """RUMUS"""
                 # menghitung kasus akar
+                akar = []
                 for i in range(4):
-                    if (YZprod**(1/4) == 3*my_list[data][0][1]+5*my_list[data][0][2]):
-                        a = 0
+                    if (YZprod**(1/4) == YZ[i]):
+                        a.append(0)
                     else:
-                        a = 1
+                        a.append(1)
 
                 """RUMUS"""
                 # fungsi fitness
@@ -63,17 +86,17 @@ for j in range(20):
                 if f >= 0.8 :
                     # sama.append(my_list[data])
                     print(my_list[data])
-                    db.komputasi.insert({'mhs': my_list[data][0], 'dosbing' : my_list[data][1], 'p1' : my_list[data][2], 'p2' : my_list[data][3], 'fitnes' : f})
-            
+                    # db.komputasi.insert({'mhs': my_list[data][0], 'dosbing' : my_list[data][1], 'p1' : my_list[data][2], 'p2' : my_list[data][3], 'fitnes' : f})
+
             temp = my_list[0][3]
             for i in range(19):
                 my_list[i][3] = my_list[i+1][3]
-            my_list[19][3] = temp  
+            my_list[19][3] = temp
         temp = my_list[0][2]
         for i in range(19):
             my_list[i][2] = my_list[i+1][2]
-        my_list[19][2] = temp 
+        my_list[19][2] = temp
     temp = my_list[0][1]
     for i in range(19):
         my_list[i][1] = my_list[i+1][1]
-    my_list[19][1] = temp  
+    my_list[19][1] = temp

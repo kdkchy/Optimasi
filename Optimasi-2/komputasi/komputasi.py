@@ -64,6 +64,8 @@ def makeData():
 
         my_list.append(dataTable)
 
+    # print(my_list)
+
     num = 1
     for j in range(20):
         for k in range(20):
@@ -88,18 +90,13 @@ def makeData():
 
                     """RUMUS"""
                     # menghitung kasus akar
-                    # for i in range(4):
-                    if (int(YZprod**(1/4)) == int((3*my_list[data][0][1])+(5*my_list[data][0][2]))):
-                        a = 0
-                    else:
-                        a = 1
-                    # print(my_list)
-                    # print(a)
-                    # for i in range(4):
-                    #     if (int(YZprod**(1/4)) == YZ[i]):
-                    #         a = a + 0
-                    #     else:
-                    #         a = 1
+                    akar = []
+                    for i in range(4):
+                        if (int(YZprod**(1/4)) == YZ[i]):
+                            akar.append(0)
+                        else:
+                            akar.append(1)
+                    a = sum(akar)
 
                     """RUMUS"""
                     # fungsi fitness
@@ -121,3 +118,13 @@ def makeData():
         for i in range(19):
             my_list[i][1] = my_list[i+1][1]
         my_list[19][1] = temp
+
+    # print(my_list)
+
+def pewaktuan(c,a,b):
+    status = ["Kosong", "Full"]
+    hari = ["", "Senin", "Selasa", "Rabu", "Kamis", "Jumat"]
+    jam = ["", "08.00", "10.00", "13.00", "15.00"]
+    result = []
+    result.extend((hari[a],jam[b],status[c]))
+    return result

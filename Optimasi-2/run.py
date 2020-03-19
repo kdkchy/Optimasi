@@ -3,7 +3,7 @@ from pymongo import MongoClient
 import os
 import pymongo
 from bson.objectid import ObjectId
-from komputasi.komputasi import getData, makeData
+from komputasi.komputasi import getData, makeData, pewaktuan
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -28,6 +28,8 @@ def home():
 
 @app.route("/rancang")
 def rancang():
+    db.komputasi.remove({})
+    db.temp.remove({})
     dataMhs = db.dataMhs.find()
     result = []
     for i in dataMhs:
@@ -51,7 +53,6 @@ def actRancang():
 
     getData(clicked[0],clicked[1],clicked[2],clicked[3]) #pembuatan populasi
     makeData()  #komputasi
-
     return "Success"
 
 @app.route('/komputasi')
@@ -60,18 +61,21 @@ def komputasi():
     result = []
     for i in hitung:
         result.append(i)
-    # db.komputasi.remove({})
-    # db.temp.remove({})
-    result_2 = []
 
+    result_2 = []
     dataMhs = db.dataMhs.find_one({"_id":ObjectId(clicked[0])})
     dataPembimbing = db.dataDosen.find_one({"_id":ObjectId(clicked[1])})
     dataPenguji_1 = db.dataDosen.find_one({"_id":ObjectId(clicked[2])})
     dataPenguji_2 = db.dataDosen.find_one({"_id":ObjectId(clicked[3])})
-
     result_2.extend((dataMhs, dataPembimbing, dataPenguji_1, dataPenguji_2))
+
+    result_3 = []
+    for i in result:
+        c, a, b = int(i.get('mhs')[0]), int(i.get('mhs')[1]),int(i.get('mhs')[2])
+        result_3.append(pewaktuan(c,a,b))
+
     return render_template('hasil.html', my_string="Jadwal Tersedia",  title="Ketersediaan Jadwal", data=result,
-    data_2=result_2, dataMhs=dataMhs, dataPembimbing=dataPembimbing, dataPenguji_1=dataPenguji_1, dataPenguji_2=dataPenguji_2)
+    data_2=result_2, data_3=result_3)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -19,21 +19,20 @@
       <th scope="col" rowspan="2" scope="row">*</th>
     </tr>
     <tr>
-      <th scope="col">{{dataMhs.nama}}</th>
-      <th scope="col">{{dataPembimbing.nama}}</th>
-      <th scope="col">{{dataPenguji_1.nama}}</th>
-      <th scope="col">{{dataPenguji_2.nama}}</th>
+      {% for j in data_2%}
+      <th scope="col">{{j.nama}}</th>
+      {% endfor %}
     </tr>
   </thead>
   <tbody>
-    {% for i in data%}
+    {% for i in data_3%}
     <tr>
       <form action="/actinsert" method="POST">
       <th scope="row">{{loop.index}}</th>
-      <td> {{i.mhs}} <input type="hidden" class="form-control" name="mhs" value="{{i.mhs}}"></td>
-      <td> {{i.dosbing}} <input type="hidden" class="form-control" name="dosbing" value="{{i.dosbing}}"></td>
-      <td> {{i.p1}} <input type="hidden" class="form-control" name="dosbing" value="{{i.p1}}"></td>
-      <td> {{i.p2}} <input type="hidden" class="form-control" name="dosbing" value="{{i.p2}}"></td>
+      <td> {{i[0]}} / {{i[1]}}  <input type="hidden" class="form-control" name="mhs" value="{{i.mhs}}"></td>
+      <td> {{i[0]}} / {{i[1]}}  <input type="hidden" class="form-control" name="dosbing" value="{{i.dosbing}}"></td>
+      <td> {{i[0]}} / {{i[1]}}  <input type="hidden" class="form-control" name="dosbing" value="{{i.p1}}"></td>
+      <td> {{i[0]}} / {{i[1]}}  <input type="hidden" class="form-control" name="dosbing" value="{{i.p2}}"></td>
       <td>
       <select class="form-control" id="ruang" name="ruang">
         <option value="1">1</option>
@@ -44,7 +43,14 @@
             <textarea name="judul" class="form-control" rows="4" name="judul"></textarea>
           </div>
       </td>
-      <td><input type="submit" class="btn btn-primary" value="Rancang slur!"></td>
+      <td>
+        <div class="radio">
+          <label><input type="radio" name="optradio" checked>Skripsi</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="optradio">Pra</label>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Rancang slur!"></td>
       </form>
     </tr>
     {% endfor %}
