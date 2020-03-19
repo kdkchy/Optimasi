@@ -5,15 +5,17 @@
 
 <br>
 <h3>{{my_string}}</h3>
+<br>
+<h5><strong style="background-color:yellow;color:yellow">___</strong> - Ada Kegiatan</h5>
 
 <table class="table table-hover">
   <thead>
     <tr>
       <th scope="col" rowspan="2" scope="row"></th>
-      <th scope="col">Mahasiswa</th>
-      <th scope="col">Dosen Pembimbing</th>
-      <th scope="col">Penguji 1</th>
-      <th scope="col">Penguji 2</th>
+      <th scope="col"><h4>Mahasiswa</h4></th>
+      <th scope="col"><h4>Dosen Pembimbing</h4></th>
+      <th scope="col"><h4>Penguji 1</h4></th>
+      <th scope="col"><h4>Penguji 2</h4></th>
       <th scope="col" rowspan="2" scope="row">Ruangan</th>
       <th scope="col" rowspan="2" scope="row">Judul</th>
       <th scope="col" rowspan="2" scope="row">*</th>
@@ -25,14 +27,14 @@
     </tr>
   </thead>
   <tbody>
-    {% for i in data_3%}
+    {% for i, mhs, dosbing, p1, p2 in zipdata%}
     <tr>
       <form action="/actinsert" method="POST">
       <th scope="row">{{loop.index}}</th>
-      <td> {{i[0]}} / {{i[1]}}  <input type="hidden" class="form-control" name="mhs" value="{{i.mhs}}"></td>
-      <td> {{i[0]}} / {{i[1]}}  <input type="hidden" class="form-control" name="dosbing" value="{{i.dosbing}}"></td>
-      <td> {{i[0]}} / {{i[1]}}  <input type="hidden" class="form-control" name="dosbing" value="{{i.p1}}"></td>
-      <td> {{i[0]}} / {{i[1]}}  <input type="hidden" class="form-control" name="dosbing" value="{{i.p2}}"></td>
+      <td> {{mhs[1]}} / {{mhs[2]}} <br> <strong style="background-color:yellow;color:yellow">{{mhs[0]}}</strong>  <input type="hidden" class="form-control" name="mhs" value="{{i.mhs}}"></td>
+      <td> {{dosbing[1]}} / {{dosbing[2]}} <br> <strong style="background-color:yellow;color:yellow">{{dosbing[0]}}</strong> <input type="hidden" class="form-control" name="dosbing" value="{{i.dosbing}}"></td>
+      <td> {{p1[1]}} / {{p1[2]}} <br> <strong style="background-color:yellow;color:yellow">{{p1[0]}}</strong>  <input type="hidden" class="form-control" name="dosbing" value="{{i.p1}}"></td>
+      <td> {{p2[1]}} / {{p2[2]}}  <br> <strong style="background-color:yellow;color:yellow">{{p2[0]}}</strong> <input type="hidden" class="form-control" name="dosbing" value="{{i.p2}}"></td>
       <td>
       <select class="form-control" id="ruang" name="ruang">
         <option value="1">1</option>

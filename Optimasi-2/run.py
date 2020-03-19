@@ -69,13 +69,28 @@ def komputasi():
     dataPenguji_2 = db.dataDosen.find_one({"_id":ObjectId(clicked[3])})
     result_2.extend((dataMhs, dataPembimbing, dataPenguji_1, dataPenguji_2))
 
-    result_3 = []
+    mhs, dosbing, p1, p2, ruangan = [], [], [], [], []
     for i in result:
-        c, a, b = int(i.get('mhs')[0]), int(i.get('mhs')[1]),int(i.get('mhs')[2])
-        result_3.append(pewaktuan(c,a,b))
+        a, b, c = int(i.get('mhs')[0]), int(i.get('mhs')[1]),int(i.get('mhs')[2])
+        mhs.append(pewaktuan(a,b,c))
+        a, b, c = int(i.get('dosbing')[0]), int(i.get('dosbing')[1]),int(i.get('dosbing')[2])
+        dosbing.append(pewaktuan(a,b,c))
+        a, b, c = int(i.get('p1')[0]), int(i.get('p1')[1]),int(i.get('p1')[2])
+        p1.append(pewaktuan(a,b,c))
+        a, b, c = int(i.get('p2')[0]), int(i.get('p2')[1]),int(i.get('p2')[2])
+        p2.append(pewaktuan(a,b,c))
+        ruangan.append([b,c])
+
+    print(ruangan)
+    zipdata = zip(result, mhs, dosbing, p1, p2)
+    hasilRuangan = db.ruangan.find({ 'waktu' : ruangan[1]})
+    result_3 = []
+    for i in hasilRuangan:
+        result_3.append(i)
+    print(result_3)
 
     return render_template('hasil.html', my_string="Jadwal Tersedia",  title="Ketersediaan Jadwal", data=result,
-    data_2=result_2, data_3=result_3)
+    data_2=result_2, data_3=mhs, zipdata=zipdata)
 
 if __name__ == '__main__':
     app.run(debug=True)

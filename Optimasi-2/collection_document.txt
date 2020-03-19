@@ -21,6 +21,8 @@ db.createCollection('komputasi')
 db.createCollection('temp')
 db.createCollection('dataMhs')
 db.createCollection('dataDosen')
+db.createCollection('ruangan')
+db.createCollection('jadwal')
 
     db.dataMhs.insert({
         'nama' : 'Pande Kadek Cahya Wisnu Murti',
@@ -67,6 +69,19 @@ db.createCollection('dataDosen')
         '17' : [0,5,1] , '18' : [0,5,2], '19' : [0,5,3],'20' : [0,5,4],
     })
 
+
+    db.ruangan.insert({
+        'waktu' : [1,2],
+        'ruangan' : ["B.1.2", "B.4.4"]
+    })
+    db.ruangan.insert({
+        'waktu' : [2,1],
+        'ruangan' : ["A.1.2", "S.4.4"]
+    })
+    db.ruangan.insert({
+        'waktu' : [5,1],
+        'ruangan' : ["S.1.2", "Q.4.4"]
+    })
 
 rumus salah ketika mencari produk di YZ
 flowchar salah

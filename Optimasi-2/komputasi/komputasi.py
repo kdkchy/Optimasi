@@ -121,10 +121,10 @@ def makeData():
 
     # print(my_list)
 
-def pewaktuan(c,a,b):
-    status = ["Kosong", "Full"]
+def pewaktuan(a,b,c):
+    status = ["", "___________"]
     hari = ["", "Senin", "Selasa", "Rabu", "Kamis", "Jumat"]
     jam = ["", "08.00", "10.00", "13.00", "15.00"]
     result = []
-    result.extend((hari[a],jam[b],status[c]))
+    result.extend((status[a],hari[b],jam[c]))
     return result
