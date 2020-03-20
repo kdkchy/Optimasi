@@ -4,6 +4,7 @@ import os
 import pymongo
 from bson.objectid import ObjectId
 from komputasi.komputasi import getData, makeData, pewaktuan
+import calendar
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -82,15 +83,42 @@ def komputasi():
         ruangan.append([b,c])
 
     print(ruangan)
-    zipdata = zip(result, mhs, dosbing, p1, p2)
-    hasilRuangan = db.ruangan.find({ 'waktu' : ruangan[1]})
-    result_3 = []
-    for i in hasilRuangan:
-        result_3.append(i)
-    print(result_3)
 
+    ruanganList = []
+    for i in range(len(ruangan)):
+        hasilRuangan = db.ruangan.find({ 'waktu' : ruangan[i]})
+        for i in hasilRuangan:
+            ruanganList.append(i)
+
+    for i in range(len(ruanganList)):
+        print(ruanganList[i].get('ruangan')[0])
+
+    zipdata = zip(result, mhs, dosbing, p1, p2, ruanganList)
     return render_template('hasil.html', my_string="Jadwal Tersedia",  title="Ketersediaan Jadwal", data=result,
-    data_2=result_2, data_3=mhs, zipdata=zipdata)
+    data_2=result_2, zipdata=zipdata, ruanganList=ruanganList)
+
+
+@app.route('/actInsert', methods=["POST"])
+def actInsert():
+    try:
+        status=request.values.get("status")
+        mhs=request.values.get("mhs")
+        dosbing=request.values.get("dosbing")
+        p1=request.values.get("p1")
+        p2=request.values.get("p2")
+        ruangan=request.values.get("ruang")
+
+        judul=request.values.get("judul")
+
+        db.jadwal.insert({"status":status, "hari dan jam": mhs})
+
+        return render_template(
+                'msg.html', my_string="Data Has Been Stored.", title="Insert")
+
+    except:
+        return render_template(
+                'msg.html', my_string="Databases Connection Error!", title="Insert")
+    return render_template('msg.html', my_string="Sukses")
 
 if __name__ == '__main__':
     app.run(debug=True)

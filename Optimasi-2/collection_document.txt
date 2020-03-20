@@ -71,17 +71,109 @@ db.createCollection('jadwal')
 
 
     db.ruangan.insert({
-        'waktu' : [1,2],
+        'waktu' : [1,1],
         'ruangan' : ["B.1.2", "B.4.4"]
     })
     db.ruangan.insert({
-        'waktu' : [2,1],
+        'waktu' : [1,2],
         'ruangan' : ["A.1.2", "S.4.4"]
     })
     db.ruangan.insert({
-        'waktu' : [5,1],
+        'waktu' : [1,3],
         'ruangan' : ["S.1.2", "Q.4.4"]
     })
+    db.ruangan.insert({
+        'waktu' : [1,4],
+        'ruangan' : ["A.4.2", "B.4.4"]
+    })
+
+    db.ruangan.insert({
+        'waktu' : [2,1],
+        'ruangan' : ["B.1.2", "B.4.4"]
+    })
+    db.ruangan.insert({
+        'waktu' : [2,2],
+        'ruangan' : ["A.1.2", "S.4.4"]
+    })
+    db.ruangan.insert({
+        'waktu' : [2,3],
+        'ruangan' : ["S.1.2", "Q.4.4"]
+    })
+    db.ruangan.insert({
+        'waktu' : [2,4],
+        'ruangan' : ["A.4.2", "B.4.4"]
+    })
+
+    db.ruangan.insert({
+        'waktu' : [3,1],
+        'ruangan' : ["B.1.2", "B.4.4"]
+    })
+    db.ruangan.insert({
+        'waktu' : [3,2],
+        'ruangan' : ["A.1.2", "S.4.4"]
+    })
+    db.ruangan.insert({
+        'waktu' : [3,3],
+        'ruangan' : ["S.1.2", "Q.4.4"]
+    })
+    db.ruangan.insert({
+        'waktu' : [3,4],
+        'ruangan' : ["A.4.2", "B.4.4"]
+    })
+
+    db.ruangan.insert({
+        'waktu' : [4,1],
+        'ruangan' : ["B.1.2", "B.4.4"]
+    })
+    db.ruangan.insert({
+        'waktu' : [4,2],
+        'ruangan' : ["A.1.2", "S.4.4"]
+    })
+    db.ruangan.insert({
+        'waktu' : [4,3],
+        'ruangan' : ["S.1.2", "Q.4.4"]
+    })
+    db.ruangan.insert({
+        'waktu' : [4,4],
+        'ruangan' : ["A.4.2", "B.4.4"]
+    })
+
+    db.ruangan.insert({
+        'waktu' : [5,1],
+        'ruangan' : ["B.1.2", "B.4.4"]
+    })
+    db.ruangan.insert({
+        'waktu' : [5,2],
+        'ruangan' : ["A.1.2", "S.4.4"]
+    })
+    db.ruangan.insert({
+        'waktu' : [5,3],
+        'ruangan' : ["S.1.2", "Q.4.4"]
+    })
+    db.ruangan.insert({
+        'waktu' : [5,4],
+        'ruangan' : ["A.4.2", "B.4.4"]
+    })
+
+
+    db.jadwal.insert({
+        'status' : 'Skripsi',
+        'hari dan jam' : 'Senin / 10.00',
+        'tanggal' : '15 April 2019',
+        'ruangan' : 'R. S.3.1',
+        'nama'  : 'Pande Kadek Cahya Wisnu Murti',
+        'nim' : '165410137',
+        'pembiming' : 'Ariesta Damayanti, S.Kom, M.Cs.',
+        'penguji_1' : 'Sari Iswanti, S.Si, M.Kom.',
+        'penguji_2' : 'F. Wiwiek Nurwiyati, Dra., M.T',
+        'judul' : 'Optimasi Penjadwalan Ujian Pra-Skripsi dan Skripsi Menggunakan Metode Algoritma Genetika'
+    })
+
+    * Judul
+    * mahasiswa
+    * pembiming, penguji1-2
+    * tanggal
+    * ruangan
 
 rumus salah ketika mencari produk di YZ
 flowchar salah

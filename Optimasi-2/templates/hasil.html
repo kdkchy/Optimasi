@@ -27,17 +27,19 @@
     </tr>
   </thead>
   <tbody>
-    {% for i, mhs, dosbing, p1, p2 in zipdata%}
+    {% for i, mhs, dosbing, p1, p2, ruanganList in zipdata%}
     <tr>
-      <form action="/actinsert" method="POST">
+      <form action="/actInsert" method="POST">
       <th scope="row">{{loop.index}}</th>
-      <td> {{mhs[1]}} / {{mhs[2]}} <br> <strong style="background-color:yellow;color:yellow">{{mhs[0]}}</strong>  <input type="hidden" class="form-control" name="mhs" value="{{i.mhs}}"></td>
+      <td> {{mhs[1]}} / {{mhs[2]}} <br> <strong style="background-color:yellow;color:yellow">{{mhs[0]}}</strong>  <input type="hidden" class="form-control" name="mhs" value="{{mhs[1]}} / {{mhs[2]}}"></td>
       <td> {{dosbing[1]}} / {{dosbing[2]}} <br> <strong style="background-color:yellow;color:yellow">{{dosbing[0]}}</strong> <input type="hidden" class="form-control" name="dosbing" value="{{i.dosbing}}"></td>
-      <td> {{p1[1]}} / {{p1[2]}} <br> <strong style="background-color:yellow;color:yellow">{{p1[0]}}</strong>  <input type="hidden" class="form-control" name="dosbing" value="{{i.p1}}"></td>
-      <td> {{p2[1]}} / {{p2[2]}}  <br> <strong style="background-color:yellow;color:yellow">{{p2[0]}}</strong> <input type="hidden" class="form-control" name="dosbing" value="{{i.p2}}"></td>
+      <td> {{p1[1]}} / {{p1[2]}} <br> <strong style="background-color:yellow;color:yellow">{{p1[0]}}</strong>  <input type="hidden" class="form-control" name="p1" value="{{i.p1}}"></td>
+      <td> {{p2[1]}} / {{p2[2]}}  <br> <strong style="background-color:yellow;color:yellow">{{p2[0]}}</strong> <input type="hidden" class="form-control" name="p2" value="{{i.p2}}"></td>
       <td>
       <select class="form-control" id="ruang" name="ruang">
-        <option value="1">1</option>
+        {%for j in range(ruanganList.ruangan| length)%}
+        <option value="{{ruanganList.ruangan[j]}}">{{ruanganList.ruangan[j]}}</option>
+        {% endfor%}
       </select>
       </td>
       <td>
@@ -47,10 +49,10 @@
       </td>
       <td>
         <div class="radio">
-          <label><input type="radio" name="optradio" checked>Skripsi</label>
+          <label><input type="radio" name="status" value="skripsi" checked>Skripsi</label>
         </div>
         <div class="radio">
-          <label><input type="radio" name="optradio">Pra</label>
+          <label><input type="radio" name="status" value="pra">Pra</label>
         </div>
         <input type="submit" class="btn btn-primary" value="Rancang slur!"></td>
       </form>
