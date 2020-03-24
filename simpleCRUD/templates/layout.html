@@ -5,12 +5,27 @@
     <title>{% block title %}{% endblock %} - Flask Simple CRUD with MongoDB</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
     <style type="text/css">
       .container {
         max-width: 1000px;
         padding-top: 50px;
       }
       h3 {color: red;}
+
+      .table tr {
+          cursor: pointer;
+      }
+      .hiddenRow {
+          padding: 0 5px !important;
+          background-color: #ffffff;
+          font-size: 15px;
+      }
+
+
     </style>
   </head>
   <body>
@@ -25,17 +40,17 @@
             </button>
             <a class="navbar-brand" href="/">Kadek Cahya</a>
           </div>
-      
+
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 {{ nav_link('home', 'Home') }}
                 {{ nav_link('insert', 'Insert') }}
               </ul>
-              
+
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
       </nav>
-      
+
     <div class="container">
         {% block heading %}
         <h1>{% block page %}{% endblock %} - Flask Simple CRUD with MongoDB</h1>

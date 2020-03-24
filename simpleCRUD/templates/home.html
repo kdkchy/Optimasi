@@ -8,24 +8,40 @@
   <h3>{{my_string}}</h3>
 
   <p>Member</p>
-  <table class="table">
+  <table class="table table-condensed" style="border-collapse:collapse;">
       <thead>
           <tr>
+              <th>#</th>
               <th>Name</th>
               <th>Address</th>
           </tr>
       </thead>
       <tbody>
           {% for n in data %}
-          <tr>
+          <tr data-toggle="collapse" data-target="#demo{{loop.index}}" class="accordion-toggle">
+          <td>{{loop.index}}</td>
           <td>{{n.name}}</td>
           <td>{{n.address}}</td>
           <td><a href="/update/{{n['_id']}}">Update</a></td>
           <td><a href="./remove?_id={{ n['_id']}}">Delete</a></td>
+          </tr>
+          <tr >
+              <td colspan="5" class="hiddenRow"><div class="accordian-body collapse" id="demo{{loop.index}}"> <p>{{loop.index}}</p>Demo Content1 </div> </td>
           </tr>
           {% endfor %}
       </tbody>
   </table>
   <br>
 </div>
+
+
+<script type="text/javascript">
+  $('.accordian-body').on('show.bs.collapse', function () {
+    $(this).closest("table")
+        .find(".collapse.in")
+        .not(this)
+        //.collapse('toggle')
+})
+</script>
+
 {% endblock %}

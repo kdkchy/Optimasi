@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request,render_template, flash
+from flask import Flask, jsonify, request,render_template, flash, redirect, url_for
 from pymongo import MongoClient
 import os
 import pymongo
@@ -15,7 +15,8 @@ client = MongoClient(mongodb_host, mongodb_port)
 db = client.optimasi
 
 #Global Variable
-clicked=[]
+clicked = []
+result_2 = None
 
 @app.route("/")
 def home():
@@ -63,6 +64,7 @@ def komputasi():
     for i in hitung:
         result.append(i)
 
+    global result_2
     result_2 = []
     dataMhs = db.dataMhs.find_one({"_id":ObjectId(clicked[0])})
     dataPembimbing = db.dataDosen.find_one({"_id":ObjectId(clicked[1])})
@@ -82,16 +84,12 @@ def komputasi():
         p2.append(pewaktuan(a,b,c))
         ruangan.append([b,c])
 
-    print(ruangan)
 
     ruanganList = []
     for i in range(len(ruangan)):
         hasilRuangan = db.ruangan.find({ 'waktu' : ruangan[i]})
         for i in hasilRuangan:
             ruanganList.append(i)
-
-    for i in range(len(ruanganList)):
-        print(ruanganList[i].get('ruangan')[0])
 
     zipdata = zip(result, mhs, dosbing, p1, p2, ruanganList)
     return render_template('hasil.html', my_string="Jadwal Tersedia",  title="Ketersediaan Jadwal", data=result,
@@ -110,15 +108,14 @@ def actInsert():
 
         judul=request.values.get("judul")
 
-        db.jadwal.insert({"status":status, "hari dan jam": mhs})
+        db.jadwal.insert({"status":status, "hari dan jam": mhs, "mhs" : result_2[0].get('nama'), "dosbing" : result_2[1].get('nama')})
 
-        return render_template(
-                'msg.html', my_string="Data Has Been Stored.", title="Insert")
-
+        flash('Jadwal Terancang')
+        return redirect('/')
     except:
         return render_template(
                 'msg.html', my_string="Databases Connection Error!", title="Insert")
-    return render_template('msg.html', my_string="Sukses")
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True)

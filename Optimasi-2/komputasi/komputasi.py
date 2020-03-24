@@ -104,8 +104,10 @@ def makeData():
                     if f >= 0.8 :
                         # sama.append(my_list[data])
                         print(my_list[data])
+                        print("Generasi {}".format(num))
                         db.komputasi.insert({'mhs': my_list[data][0], 'dosbing' : my_list[data][1], 'p1' : my_list[data][2], 'p2' : my_list[data][3], 'YZ' : YZ, 'fitnes' : f})
 
+                num = num + 1
                 temp = my_list[0][3]
                 for i in range(19):
                     my_list[i][3] = my_list[i+1][3]

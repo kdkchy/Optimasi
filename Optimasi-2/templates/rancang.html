@@ -32,11 +32,9 @@
               </tr>
             </thead>
             <tbody>
-            {% set count = 1%}
               {% for i in data%}
               <tr>
-                <th scope="row">{{count}}</th>
-                {% set count = count + 1%}
+                <th scope="row">{{loop.index}}</th>
                 <td>{{i.nama}}</td>
                 <td>{{i.nim}}</td>
                 <td><input type="checkbox" class="chk" value="{{i['_id']}}"></td>
@@ -56,7 +54,6 @@
               </tr>
             </thead>
             <tbody>
-            {% set count = 1%}
               {% for j in data_2%}
               <tr>
                 <th scope="row">{{ loop.index }}</th>
