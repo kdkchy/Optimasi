@@ -12,10 +12,11 @@
 <br>
 <div id="exTab2" class="containerHome">
 <ul class="nav nav-tabs">
-			<li class="active">
-        <a  href="#1" data-toggle="tab">{{my_string}}</a>
+			<li class="active"><a  href="#1" data-toggle="tab">{{my_string}}</a>
 			</li>
 			<li><a href="#2" data-toggle="tab">{{my_string_2}}</a>
+			</li>
+			<li><a href="#3" data-toggle="tab">{{my_string_3}}</a>
 			</li>
 		</ul>
 
@@ -64,6 +65,29 @@
             </tbody>
           </table>
         </div>
+				<div class="tab-pane" id="3">
+          <br>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nama</th>
+                <th scope="col">*</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for k in data_3%}
+              <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{k.nama}}</td>
+                <td><input type="checkbox" class="chk" value="{{k['_id']}}"></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+
 			</div>
   </div>
 
@@ -79,10 +103,10 @@
           // Declare a checkbox array
           var chkArray = [];
 
-
           // Look for all checkboxes that have a specific class and was checked
           $(".chk:checked").each(function() {
               chkArray.push($(this).val());
+							console.log(chkArray);
           });
 
           // Join the array separated by the comma

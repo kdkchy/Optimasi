@@ -13,8 +13,6 @@
 {% block content %}
 
 
-
-  <br>
   <h3>{{my_string_1}}</h3>
   <table class="table table-bordered" id="cssTable">
       <thead>
@@ -30,41 +28,27 @@
       </thead>
 
       <tbody>
-         <div >
+           {% for i in data %}
         <tr>
-            <th rowspan="2" scope="row">1</th>
-            <td>Senin / 10.00</td>
-            <td>Pande Kadek Cahya Wisnu Murti</td>
-            <td rowspan="2">Ariesta Damayanti, S.Kom, M.Cs.</td>
-            <td>Sari Iswanti, S.Si, M.Kom.</td>
-            <td rowspan="2">Optimasi Penjadwalan Ujian Pra-Skripsi dan Skripsi Menggunakan Metode Algoritma Genetika</td>
+            <th rowspan="2" scope="row">{{loop.index}}</th>
+            <td>{{i.harijam}}</td>
+            <td>{{i.mhs}}</td>
+            <td rowspan="2">{{i.dosbing}}</td>
+            <td>{{i.p1}}</td>
+            <td rowspan="2">{{i.judul}}</td>
             </tr>
             <tr>
-            <td>15 April 2020 / R. S.3.1</td>
-            <td>165410137</td>
-            <td>F. Wiwiek Nurwiyati, Dra., M.T.</td>
+            <td>{{i.tgl}} / R. {{i.ruangan}}</td>
+            <td>{{i.nim}}</td>
+            <td>{{i.p2}}</td>
         </tr>
-    </div>
-        <tr>
-            <th rowspan="2" scope="row">2</th>
-            <td>Senin / 10.00 </td>
-            <td>Pande Kadek Cahya Wisnu Murti</td>
-            <td rowspan="2">Ariesta Damayanti, S.Kom, M.Cs.</td>
-            <td>Sari Iswanti, S.Si, M.Kom.</td>
-            <td rowspan="2">Optimasi Penjadwalan Ujian Pra-Skripsi dan Skripsi Menggunakan Metode Algoritma Genetika</td>
-            </tr>
-            <tr>
-            <td>15 April 2020 / R. S.3.1</td>
-            <td>165410137</td>
-            <td>F. Wiwiek Nurwiyati, Dra., M.T.</td>
-        </tr>
+        {% endfor %}
+
       </tbody>
   </table>
   <br>
 
   <h3>{{my_string_2}}</h3>
-
-
   <table class="table table-bordered" id="cssTable">
       <thead>
           <tr>
@@ -79,36 +63,26 @@
       </thead>
 
       <tbody>
-         <div >
+           {% for j in data_2 %}
         <tr>
-            <th rowspan="2" scope="row">1</th>
-            <td>Senin / 13.00 </td>
-            <td>Pande Kadek Cahya Wisnu Murti</td>
-            <td rowspan="2">Ariesta Damayanti, S.Kom, M.Cs.</td>
-            <td>Sari Iswanti, S.Si, M.Kom.</td>
-            <td rowspan="2">Optimasi Penjadwalan Ujian Pra-Skripsi dan Skripsi Menggunakan Metode Algoritma Genetika</td>
+            <th rowspan="2" scope="row">{{loop.index}}</th>
+            <td>{{j.harijam}}</td>
+            <td>{{j.mhs}}</td>
+            <td rowspan="2">{{j.dosbing}}</td>
+            <td>{{j.p1}}</td>
+            <td rowspan="2">{{j.judul}}</td>
             </tr>
             <tr>
-            <td>15 April 2020 / R. S.3.1</td>
-            <td>165410137</td>
-            <td>F. Wiwiek Nurwiyati, Dra., M.T.</td>
+            <td>{{j.tgl}} / R. {{j.ruangan}}</td>
+            <td>{{j.nim}}</td>
+            <td>{{j.p2}}</td>
         </tr>
-    </div>
-        <tr>
-            <th rowspan="2" scope="row">2</th>
-            <td>Senin / 13.00 </td>
-            <td>Pande Kadek Cahya Wisnu Murti</td>
-            <td rowspan="2">Ariesta Damayanti, S.Kom, M.Cs.</td>
-            <td>Sari Iswanti, S.Si, M.Kom.</td>
-            <td rowspan="2">Optimasi Penjadwalan Ujian Pra-Skripsi dan Skripsi Menggunakan Metode Algoritma Genetika</td>
-            </tr>
-            <tr>
-            <td>15 April 2020 / R. S.3.1</td>
-            <td>165410137</td>
-            <td>F. Wiwiek Nurwiyati, Dra., M.T.</td>
-        </tr>
+        {% endfor %}
+
       </tbody>
   </table>
   <br>
+
+
 
 {% endblock %}

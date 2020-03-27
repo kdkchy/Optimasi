@@ -21,30 +21,56 @@ result_2 = None
 @app.route("/")
 def home():
 
-    jadwal = db.jadwal.find()
-    result = []
+    jadwal = db.jadwal.find({ 'status' : 'skripsi'})
+    skripsi = []
     for i in jadwal:
-        result.append(i)
+        skripsi.append(i)
 
-    return render_template('home.html', my_string_1="Jadwal Skripsi", my_string_2="Jadwal Pra Skripsi", title="Beranda", data=result)
+    jadwal = db.jadwal.find({ 'status' : 'pra'})
+    pra = []
+    for i in jadwal:
+        pra.append(i)
+
+    return render_template('home.html', my_string_1="Jadwal Skripsi", my_string_2="Jadwal Pra Skripsi",
+    title="Beranda", data=skripsi, data_2=pra)
 
 @app.route("/rancang")
 def rancang():
     db.komputasi.remove({})
     db.temp.remove({})
-    dataMhs = db.dataMhs.find()
+    dataMhs = db.dataMhs.find().sort("nim",pymongo.ASCENDING)
     result = []
     for i in dataMhs:
         result.append(i)
-    # print(result)
 
     dataDosen = db.dataDosen.find()
     result_2 = []
     for i in dataDosen:
         result_2.append(i)
+
+    dataPenguji = db.dataPenguji.find()
+    result_3 = []
+    for i in dataPenguji:
+        result_3.append(i)
     return render_template(
-        'rancang.html', my_string="Mahasiswa",my_string_2="Dosen",
-        title="Rancang", data=result, data_2=result_2)
+        'rancang.html', my_string="Mahasiswa", my_string_2="Dosen Pembimbing", my_string_3="Penguji",
+        title="Rancang", data=result, data_2=result_2, data_3=result_3)
+
+@app.route("/inputtMhs")
+def inputMhs():
+    return render_template('inputMhs.html', title="Input Mahasiswa", my_string="Lengkapi Data")
+
+@app.route("/actinputtMhs", methods=["POST"])
+def actinputMhs():
+    return render_template('inputMhs.html', title="Input Mahasiswa", my_string="Lengkapi Data")
+
+@app.route("/inputDosen")
+def inputDosen():
+    return render_template('inputDosen.html',title="Input Dosen", my_string="Lengkapi Data")
+
+@app.route("/actinputDosen", methods=["POST"])
+def actinputDosen():
+    return render_template('inputDosen.html',title="Input Dosen", my_string="Lengkapi Data")
 
 
 @app.route('/actRancang', methods=['POST'])
@@ -68,8 +94,8 @@ def komputasi():
     result_2 = []
     dataMhs = db.dataMhs.find_one({"_id":ObjectId(clicked[0])})
     dataPembimbing = db.dataDosen.find_one({"_id":ObjectId(clicked[1])})
-    dataPenguji_1 = db.dataDosen.find_one({"_id":ObjectId(clicked[2])})
-    dataPenguji_2 = db.dataDosen.find_one({"_id":ObjectId(clicked[3])})
+    dataPenguji_1 = db.dataPenguji.find_one({"_id":ObjectId(clicked[2])})
+    dataPenguji_2 = db.dataPenguji.find_one({"_id":ObjectId(clicked[3])})
     result_2.extend((dataMhs, dataPembimbing, dataPenguji_1, dataPenguji_2))
 
     mhs, dosbing, p1, p2, ruangan = [], [], [], [], []
@@ -83,7 +109,6 @@ def komputasi():
         a, b, c = int(i.get('p2')[0]), int(i.get('p2')[1]),int(i.get('p2')[2])
         p2.append(pewaktuan(a,b,c))
         ruangan.append([b,c])
-
 
     ruanganList = []
     for i in range(len(ruangan)):
@@ -100,15 +125,25 @@ def komputasi():
 def actInsert():
     try:
         status=request.values.get("status")
-        mhs=request.values.get("mhs")
+        harijam=request.values.get("mhs")
         dosbing=request.values.get("dosbing")
         p1=request.values.get("p1")
         p2=request.values.get("p2")
         ruangan=request.values.get("ruang")
-
         judul=request.values.get("judul")
 
-        db.jadwal.insert({"status":status, "hari dan jam": mhs, "mhs" : result_2[0].get('nama'), "dosbing" : result_2[1].get('nama')})
+        db.jadwal.insert({
+        "status":status,
+        "harijam": harijam,
+        "tgl" : "kosong",
+        "ruangan" : ruangan,
+        "mhs" : result_2[0].get('nama'),
+        "nim" : result_2[0].get('nim'),
+        "dosbing" : result_2[1].get('nama'),
+        "p1" : result_2[2].get('nama'),
+        "p2" : result_2[3].get('nama'),
+        "judul" : judul
+        })
 
         flash('Jadwal Terancang')
         return redirect('/')

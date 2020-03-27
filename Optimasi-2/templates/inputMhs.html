@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block page %}{{title}}{% endblock %}
+{% block content %}
+
+  <h3>{{my_string}}</h3>
+  <div class="insert">
+    <form action="/actinputtMhs" method="POST">
+        <div class="form-group">
+            <label for="">Name</label>
+            <input type="text" name="nama" class="form-control" style="width: 500px;"">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="">NIM</label>
+            <input type="text" name="nim" class="form-control" style="width: 150px;">
+        </div>
+
+        {% for i in range(20)%}
+            <input type="checkbox"  value="{{loop.index}}">
+            {% if loop.index%4 == 0 %}
+            <br>
+            {% endif %}
+        {% endfor %}
+
+        <hr>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+{% endblock %}
