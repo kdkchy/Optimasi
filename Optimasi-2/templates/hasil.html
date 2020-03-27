@@ -3,12 +3,15 @@
 {% block page %}{{title}}{% endblock %}
 {% block content %}
 
+<style type="text/css">
+
+</style>
 <br>
 <h3>{{my_string}}</h3>
 <br>
 <h5><strong style="background-color:yellow;color:yellow">___</strong> - Ada Kegiatan</h5>
 
-<table class="table table-hover">
+<table class="table table-hover table-condensed" style="border-collapse:collapse;">
   <thead>
     <tr>
       <th scope="col" rowspan="2" scope="row"></th>
@@ -16,9 +19,6 @@
       <th scope="col"><h4>Dosen Pembimbing</h4></th>
       <th scope="col"><h4>Penguji 1</h4></th>
       <th scope="col"><h4>Penguji 2</h4></th>
-      <th scope="col" rowspan="2" scope="row">Ruangan</th>
-      <th scope="col" rowspan="2" scope="row">Judul</th>
-      <th scope="col" rowspan="2" scope="row">*</th>
     </tr>
     <tr>
       {% for j in data_2%}
@@ -28,38 +28,85 @@
   </thead>
   <tbody>
     {% for i, mhs, dosbing, p1, p2, ruanganList in zipdata%}
-    <tr>
-      <form action="/actInsert" method="POST">
+    <tr data-toggle="collapse" data-target="#demo{{loop.index}}" class="accordion-toggle" height="100">
+
       <th scope="row">{{loop.index}}</th>
-      <td> {{mhs[1]}} / {{mhs[2]}} <br> <strong style="background-color:yellow;color:yellow">{{mhs[0]}}</strong>  <input type="hidden" class="form-control" name="mhs" value="{{mhs[1]}} / {{mhs[2]}}"></td>
-      <td> {{dosbing[1]}} / {{dosbing[2]}} <br> <strong style="background-color:yellow;color:yellow">{{dosbing[0]}}</strong> <input type="hidden" class="form-control" name="dosbing" value="{{i.dosbing}}"></td>
-      <td> {{p1[1]}} / {{p1[2]}} <br> <strong style="background-color:yellow;color:yellow">{{p1[0]}}</strong>  <input type="hidden" class="form-control" name="p1" value="{{i.p1}}"></td>
-      <td> {{p2[1]}} / {{p2[2]}}  <br> <strong style="background-color:yellow;color:yellow">{{p2[0]}}</strong> <input type="hidden" class="form-control" name="p2" value="{{i.p2}}"></td>
-      <td>
-      <select class="form-control" id="ruang" name="ruang">
-        {%for j in range(ruanganList.ruangan| length)%}
-        <option value="{{ruanganList.ruangan[j]}}">{{ruanganList.ruangan[j]}}</option>
-        {% endfor%}
-      </select>
-      </td>
-      <td>
-          <div class="form-group">
-            <textarea name="judul" class="form-control" rows="4" name="judul"></textarea>
-          </div>
-      </td>
-      <td>
-        <div class="radio">
-          <label><input type="radio" name="status" value="skripsi" checked>Skripsi</label>
-        </div>
-        <div class="radio">
-          <label><input type="radio" name="status" value="pra">Pra</label>
-        </div>
-        <input type="submit" class="btn btn-primary" value="Rancang slur!"></td>
-      </form>
+      <td> {{mhs[1]}} / {{mhs[2]}} <br> <strong style="background-color:yellow;color:yellow">{{mhs[0]}}</strong> </td>
+      <td> {{dosbing[1]}} / {{dosbing[2]}} <br> <strong style="background-color:yellow;color:yellow">{{dosbing[0]}}</strong> </td>
+      <td> {{p1[1]}} / {{p1[2]}} <br> <strong style="background-color:yellow;color:yellow">{{p1[0]}}</strong> </td>
+      <td> {{p2[1]}} / {{p2[2]}}  <br> <strong style="background-color:yellow;color:yellow">{{p2[0]}}</strong> </td>
+
+    </tr>
+    <tr >
+        <td colspan="4" class="hiddenRow" >
+          <div class="accordian-body collapse" id="demo{{loop.index}}" >
+            <br>
+            <table align="right" >
+              <tr>
+                <th>Ruangan</th>
+                <th>Judul</th>
+                <th>Tanggal</th>
+                <th>Status</th>
+                <th></th>
+                <th>*</th>
+              </tr>
+              <tr>
+                <form action="/actInsert" method="POST">
+                 <input type="hidden" class="form-control" name="mhs" value="{{mhs[1]}} / {{mhs[2]}}">
+                 <input type="hidden" class="form-control" name="dosbing" value="{{i.dosbing}}">
+                 <input type="hidden" class="form-control" name="p1" value="{{i.p1}}">
+                 <input type="hidden" class="form-control" name="p2" value="{{i.p2}}">
+                <td  style="width: 200px;">
+                <select class="form-control" id="ruang" name="ruang">
+                  {%for j in range(ruanganList.ruangan| length)%}
+                  <option value="{{ruanganList.ruangan[j]}}">{{ruanganList.ruangan[j]}}</option>
+                  {% endfor%}
+                </select>
+                </td>
+
+                <td>
+                    <div class="form-group">
+                      <textarea name="judul" class="form-control" rows="4" name="judul" style="width: 300px;"></textarea>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="form-group">
+                      <input type="text" name="tgl" class="form-control" style="width: 200px;">
+                    </div>
+                </td>
+
+                <td>
+                  <div class="radio">
+                    <label><input type="radio" name="status" value="skripsi" checked>Skripsi</label>
+                  </div>
+                  <div class="radio">
+                    <label><input type="radio" name="status" value="pra">Pra</label>
+                  </div>
+                </td>
+                <td></td>
+                <td>
+                  <input type="submit" class="btn btn-primary" value="Rancang slur!">
+                </td>
+                </form>
+              </tr>
+            </table>
+            </div>
+        </td>
+        <td></td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
 
+
+<script type="text/javascript">
+  $('.accordian-body').on('show.bs.collapse', function () {
+    $(this).closest("table")
+        .find(".collapse.in")
+        .not(this)
+        //.collapse('toggle')
+})
+</script>
 
 {% endblock %}

@@ -48,7 +48,7 @@ def rancang():
     for i in dataDosen:
         result_2.append(i)
 
-    dataPenguji = db.dataPenguji.find()
+    dataPenguji = db.dataDosen.find()
     result_3 = []
     for i in dataPenguji:
         result_3.append(i)
@@ -94,8 +94,8 @@ def komputasi():
     result_2 = []
     dataMhs = db.dataMhs.find_one({"_id":ObjectId(clicked[0])})
     dataPembimbing = db.dataDosen.find_one({"_id":ObjectId(clicked[1])})
-    dataPenguji_1 = db.dataPenguji.find_one({"_id":ObjectId(clicked[2])})
-    dataPenguji_2 = db.dataPenguji.find_one({"_id":ObjectId(clicked[3])})
+    dataPenguji_1 = db.dataDosen.find_one({"_id":ObjectId(clicked[2])})
+    dataPenguji_2 = db.dataDosen.find_one({"_id":ObjectId(clicked[3])})
     result_2.extend((dataMhs, dataPembimbing, dataPenguji_1, dataPenguji_2))
 
     mhs, dosbing, p1, p2, ruangan = [], [], [], [], []
@@ -126,6 +126,7 @@ def actInsert():
     try:
         status=request.values.get("status")
         harijam=request.values.get("mhs")
+        tgl=request.values.get("tgl")
         dosbing=request.values.get("dosbing")
         p1=request.values.get("p1")
         p2=request.values.get("p2")
@@ -135,7 +136,7 @@ def actInsert():
         db.jadwal.insert({
         "status":status,
         "harijam": harijam,
-        "tgl" : "kosong",
+        "tgl" : tgl,
         "ruangan" : ruangan,
         "mhs" : result_2[0].get('nama'),
         "nim" : result_2[0].get('nim'),

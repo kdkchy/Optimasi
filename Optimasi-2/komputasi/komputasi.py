@@ -31,7 +31,7 @@ def getData(mhs, dosen, psatu, pdua):
     for i in range(20):
         db.temp.update({"id" : i}, {'$set' : {"dosbing" : simpan_dataPerson[i]}})
 
-    ambil_dataPerson = list(db.dataPenguji.find({"_id":ObjectId(psatu)}))
+    ambil_dataPerson = list(db.dataDosen.find({"_id":ObjectId(psatu)}))
     simpan_dataPerson = []
     for i in range(20):
         j = i + 1
@@ -40,7 +40,7 @@ def getData(mhs, dosen, psatu, pdua):
     for i in range(20):
         db.temp.update({"id" : i}, {'$set' : {"p1" : simpan_dataPerson[i]}})
 
-    ambil_dataPerson = list(db.dataPenguji.find({"_id":ObjectId(pdua)}))
+    ambil_dataPerson = list(db.dataDosen.find({"_id":ObjectId(pdua)}))
     simpan_dataPerson = []
     for i in range(20):
         j = i + 1
