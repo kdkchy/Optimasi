@@ -4,7 +4,7 @@ import os
 import pymongo
 from bson.objectid import ObjectId
 from komputasi.komputasi import getData, makeData, pewaktuan
-import calendar
+import ast
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -56,12 +56,38 @@ def rancang():
         'rancang.html', my_string="Mahasiswa", my_string_2="Dosen Pembimbing", my_string_3="Penguji",
         title="Rancang", data=result, data_2=result_2, data_3=result_3)
 
-@app.route("/inputtMhs")
+@app.route("/inputMhs")
 def inputMhs():
     return render_template('inputMhs.html', title="Input Mahasiswa", my_string="Lengkapi Data")
 
-@app.route("/actinputtMhs", methods=["POST"])
+@app.route("/actinputMhs", methods=["POST"])
 def actinputMhs():
+    try:
+        data = [""]
+        for i in range(20):
+            a = ast.literal_eval(str(request.form.get(str(i+1))))
+            data.append(a)
+
+        nama = request.form.get('nama')
+        nim = request.form.get('nim')
+
+        db.dataMhs.insert({
+        "1":data[1],"2":data[2],"3":data[3],"4":data[4],
+        "5":data[5],"6":data[6],"7":data[7],"8":data[8],
+        "9":data[9],"10":data[10],"11":data[11],"12":data[12],
+        "13":data[13],"14":data[14],"15":data[15],"16":data[16],
+        "17":data[17],"18":data[18],"19":data[19],"20":data[20],
+        "nama": nama,
+        "nim" : nim,
+        })
+
+
+        flash('Data Tersimpan!')
+        return redirect('/inputMhs')
+    except:
+        return render_template(
+                'msg.html', my_string="Databases Connection Error!", title="Insert")
+
     return render_template('inputMhs.html', title="Input Mahasiswa", my_string="Lengkapi Data")
 
 @app.route("/inputDosen")
@@ -70,6 +96,30 @@ def inputDosen():
 
 @app.route("/actinputDosen", methods=["POST"])
 def actinputDosen():
+    try:
+        data = [""]
+        for i in range(20):
+            a = ast.literal_eval(str(request.form.get(str(i+1))))
+            data.append(a)
+
+        nama = request.form.get('nama')
+
+        db.dataDosen.insert({
+        "1":data[1],"2":data[2],"3":data[3],"4":data[4],
+        "5":data[5],"6":data[6],"7":data[7],"8":data[8],
+        "9":data[9],"10":data[10],"11":data[11],"12":data[12],
+        "13":data[13],"14":data[14],"15":data[15],"16":data[16],
+        "17":data[17],"18":data[18],"19":data[19],"20":data[20],
+        "nama": nama
+        })
+
+
+        flash('Data Tersimpan!')
+        return redirect('/inputDosen')
+    except:
+        return render_template(
+                'msg.html', my_string="Databases Connection Error!", title="Insert")
+
     return render_template('inputDosen.html',title="Input Dosen", my_string="Lengkapi Data")
 
 
