@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block page %}{{title}}{% endblock %}
+
+
+{% block content %}
+<table class="table">
+  <tr>
+    <th>#</th>
+    <th>Generasi</th>
+    <th>Mahasiswa</th>
+    <th>Dosbing</th>
+    <th>Penguji 1</th>
+    <th>Penguji 2</th>
+    <th>YZ</th>
+    <th>a</th>
+    <th>fitnes</th>
+  </tr>
+  {% for i in data%}
+  <tr>
+    <td>{{loop.index}}</td>
+    <td>{{i.Gen}}</td>
+    <td>{{i.mhs}}</td>
+    <td>{{i.dosbing}}</td>
+    <td>{{i.p1}}</td>
+    <td>{{i.p2}}</td>
+    <td>{{i.YZ}}</td>
+    <td>{{i.a}}</td>
+    <td>f = {{i.fitnes}}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

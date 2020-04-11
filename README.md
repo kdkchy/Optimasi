@@ -11,3 +11,10 @@ requirements
 2. pip Flask
 3. pip pymongo
 4. pip numpy
+
+
+settings VPS
+configuring mongoDB (autostart)
+make sure mongoDB already installed
+ #systemctl enable mongod.service
+ #apt update

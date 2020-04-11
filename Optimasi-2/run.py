@@ -38,6 +38,7 @@ def home():
 def rancang():
     db.komputasi.remove({})
     db.temp.remove({})
+    db.populasi.remove({})
     dataMhs = db.dataMhs.find().sort("nim",pymongo.ASCENDING)
     result = []
     for i in dataMhs:
@@ -202,6 +203,16 @@ def actInsert():
         return render_template(
                 'msg.html', my_string="Databases Connection Error!", title="Insert")
     return redirect('/')
+
+@app.route('/populasi')
+def populasi():
+
+    hasil = db.populasi.find()
+    data = []
+    for i in hasil:
+        data.append(i)
+
+    return render_template('populasi.html', title="Hasil", data=data)
 
 if __name__ == '__main__':
     app.run(debug=True)

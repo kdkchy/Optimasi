@@ -106,7 +106,7 @@ def makeData():
                         print(my_list[data])
                         print("Generasi {}".format(num))
                         db.komputasi.insert({'mhs': my_list[data][0], 'dosbing' : my_list[data][1], 'p1' : my_list[data][2], 'p2' : my_list[data][3], 'YZ' : YZ, 'fitnes' : f})
-
+                    db.populasi.insert({'Gen' : num, 'mhs': my_list[data][0], 'dosbing' : my_list[data][1], 'p1' : my_list[data][2], 'p2' : my_list[data][3], 'YZ' : YZ, 'a' : a, 'fitnes' : f})
                 num = num + 1
                 temp = my_list[0][3]
                 for i in range(19):
