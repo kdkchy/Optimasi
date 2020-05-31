@@ -29,7 +29,7 @@
   <tbody>
     {% for i, mhs, dosbing, p1, p2, ruanganList in zipdata%}
     <tr data-toggle="collapse" data-target="#demo{{loop.index}}" class="accordion-toggle" height="100">
-
+      {{result}}
       <th scope="row">{{loop.index}}</th>
       <td> {{mhs[1]}} / {{mhs[2]}} <br> <strong style="background-color:yellow;color:yellow">{{mhs[0]}}</strong> </td>
       <td> {{dosbing[1]}} / {{dosbing[2]}} <br> <strong style="background-color:yellow;color:yellow">{{dosbing[0]}}</strong> </td>

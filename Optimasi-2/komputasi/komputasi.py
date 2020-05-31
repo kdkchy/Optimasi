@@ -12,6 +12,7 @@ mongodb_port = int(os.environ.get('MONGO_PORT', '27017'))
 client = MongoClient(mongodb_host, mongodb_port)
 db = client.optimasi
 
+
 def getData(mhs, dosen, psatu, pdua):
     ambil_dataPerson = list(db.dataMhs.find({"_id":ObjectId(mhs)}))
     simpan_dataPerson = []
@@ -49,6 +50,7 @@ def getData(mhs, dosen, psatu, pdua):
     for i in range(20):
         db.temp.update({"id" : i}, {'$set' : {"p2" : simpan_dataPerson[i]}})
 
+populasi = []
 def makeData():
     result = list(db.temp.find())
     my_list = []
@@ -65,8 +67,9 @@ def makeData():
         my_list.append(dataTable)
 
     # print(my_list)
-
     num = 1
+    global populasi
+    populasi = []
     for j in range(20):
         for k in range(20):
             for l in range(20):
@@ -105,8 +108,8 @@ def makeData():
                         # sama.append(my_list[data])
                         print(my_list[data])
                         print("Generasi {}".format(num))
-                        db.komputasi.insert({'mhs': my_list[data][0], 'dosbing' : my_list[data][1], 'p1' : my_list[data][2], 'p2' : my_list[data][3], 'YZ' : YZ, 'fitnes' : f})
-                    db.populasi.insert({'Gen' : num, 'mhs': my_list[data][0], 'dosbing' : my_list[data][1], 'p1' : my_list[data][2], 'p2' : my_list[data][3], 'YZ' : YZ, 'a' : a, 'fitnes' : f})
+                        db.komputasi.insert({'Gen' : num, 'mhs': my_list[data][0], 'dosbing' : my_list[data][1], 'p1' : my_list[data][2], 'p2' : my_list[data][3], 'Hx' : hx, 'yz' : YZ, 'YZ' : YZprod, 'a' : a, 'fitnes' : f})
+                    populasi.append({'Gen' : num, 'mhs': my_list[data][0], 'dosbing' : my_list[data][1], 'p1' : my_list[data][2], 'p2' : my_list[data][3], 'Hx' : hx, 'yz' : YZ, 'YZ' : YZprod, 'a' : a, 'fitnes' : f})
                 num = num + 1
                 temp = my_list[0][3]
                 for i in range(19):
@@ -130,3 +133,7 @@ def pewaktuan(a,b,c):
     result = []
     result.extend((status[a],hari[b],jam[c]))
     return result
+
+def simpanPopulasi():
+    global populasi
+    return populasi

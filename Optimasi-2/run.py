@@ -3,7 +3,7 @@ from pymongo import MongoClient
 import os
 import pymongo
 from bson.objectid import ObjectId
-from komputasi.komputasi import getData, makeData, pewaktuan
+from komputasi.komputasi import getData, makeData, pewaktuan, simpanPopulasi
 import ast
 
 app = Flask(__name__)
@@ -207,12 +207,12 @@ def actInsert():
 @app.route('/populasi')
 def populasi():
 
-    hasil = db.populasi.find()
-    data = []
-    for i in hasil:
-        data.append(i)
+    #data = simpanPopulasi()
 
-    return render_template('populasi.html', title="Hasil", data=data)
+    #db.populasi.insert(data)
+
+    data = db.populasi.find()
+    return render_template('populasi.html', title="Rekombinasi", data=data)
 
 if __name__ == '__main__':
     app.run(debug=True)
