@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block page %}{{title}}
+{% endblock %}
+{% block content %}
+
+  <h3>{{my_string}}</h3>
+
+
+  <table class="table table-bordered" id="cssTable">
+        <thead>
+              <tr>
+                  <th scope="col">/</th>
+                  <th scope="col" width="250">Senin</th>
+                  <th scope="col" width="250">Selasa</th>
+                  <th scope="col" width="250">Rabu</th>
+                  <th scope="col" width="250">Kamis</th>
+                  <th scope="col" width="250">Jumat</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>08.00</th>
+              <td>
+              {{data[0].ruangan}}
+              </td>
+              <td>
+              {{data[4].ruangan}}
+              </td>
+              <td>
+              {{data[8].ruangan}}
+              </td>
+              <td>
+              {{data[12].ruangan}}
+              </td>
+              <td>
+              {{data[16].ruangan}}
+              </td>
+            </tr>
+            <tr>
+              <th>08.00</th>
+              <td>
+              {{data[1].ruangan}}
+              </td>
+              <td>
+              {{data[5].ruangan}}
+              </td>
+              <td>
+              {{data[9].ruangan}}
+              </td>
+              <td>
+              {{data[13].ruangan}}
+              </td>
+              <td>
+              {{data[17].ruangan}}
+              </td>
+            </tr>
+            <tr>
+              <th>08.00</th>
+              <td>
+              {{data[2].ruangan}}
+              </td>
+              <td>
+              {{data[6].ruangan}}
+              </td>
+              <td>
+              {{data[10].ruangan}}
+              </td>
+              <td>
+              {{data[14].ruangan}}
+              </td>
+              <td>
+              {{data[18].ruangan}}
+              </td>
+            </tr>
+            <tr>
+              <th>08.00</th>
+              <td>
+              {{data[3].ruangan}}
+              </td>
+              <td>
+              {{data[7].ruangan}}
+              </td>
+              <td>
+              {{data[11].ruangan}}
+              </td>
+              <td>
+              {{data[15].ruangan}}
+              </td>
+              <td>
+              {{data[19].ruangan}}
+              </td>
+            </tr>
+          </tbody>
+
+{% endblock %}

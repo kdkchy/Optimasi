@@ -6,6 +6,10 @@ from bson.objectid import ObjectId
 from komputasi.komputasi import getData, makeData, pewaktuan, simpanPopulasi
 import ast
 
+from flask_wtf import Form
+from wtforms import DateField
+from datetime import date
+
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
@@ -44,12 +48,12 @@ def rancang():
     for i in dataMhs:
         result.append(i)
 
-    dataDosen = db.dataDosen.find()
+    dataDosen = db.dataDosen.find().sort("nama",pymongo.ASCENDING)
     result_2 = []
     for i in dataDosen:
         result_2.append(i)
 
-    dataPenguji = db.dataDosen.find()
+    dataPenguji = db.dataDosen.find().sort("nama",pymongo.ASCENDING)
     result_3 = []
     for i in dataPenguji:
         result_3.append(i)
@@ -161,6 +165,7 @@ def komputasi():
         p2.append(pewaktuan(a,b,c))
         ruangan.append([b,c])
 
+
     ruanganList = []
     for i in range(len(ruangan)):
         hasilRuangan = db.ruangan.find({ 'waktu' : ruangan[i]})
@@ -207,12 +212,26 @@ def actInsert():
 @app.route('/populasi')
 def populasi():
 
-    #data = simpanPopulasi()
+    data = simpanPopulasi()
+    db.populasi.insert(data)
 
-    #db.populasi.insert(data)
-
-    data = db.populasi.find()
+    #data = db.populasi.find()
     return render_template('populasi.html', title="Rekombinasi", data=data)
+
+@app.route("/ruangan")
+def ruangan():
+    data = db.ruangan.find()
+    ruangan = []
+    for i in data:
+        ruangan.append(i)
+    return render_template('ruangan.html',title="Ruangan", data=ruangan)
+
+
+@app.route("/dosentampil")
+def dosentampil():
+    data = db.dataDosen.find_one({"_id":ObjectId("5ef426a94a1a5d997ffea4a3")})
+    return render_template('dosentampil.html',title="jadwal dosen", data=data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
