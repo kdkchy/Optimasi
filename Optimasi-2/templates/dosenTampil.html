@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block page %}{{title}}{% endblock %}
+{% block content %}
+
+
+<h3>{{my_string}}</h3>
+
+
+
+<table class="table table-borderless" id="cssTable">
+  <thead>
+    <tr>
+      <th>Nama</th>
+      <td>:</td>
+      <td>{{data['nama']}}</td>
+    </tr>
+    <tr>
+      <th>NIP</th>
+      <td>:</td>
+      <td>{{data['nip']}}</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td> </td>
+    </tr>
+  </thead>
+</table>
+
+<h3>Jadwal</h3>
+<br>
+<table class="table table-bordered" id="cssTable" style="text-align: center;">
+  <tr>
+    <th>/</th>
+    <th>Senin</th>
+    <th>Selasa</th>
+    <th>Rabu</th>
+    <th>Kami</th>
+    <th>Jumat</th>
+  </tr>
+  <tr>
+    <th>08:00</th>
+    <td>{{data_2[1][0]}}</td>
+    <td>{{data_2[5][0]}}</td>
+    <td>{{data_2[9][0]}}</td>
+    <td>{{data_2[13][0]}}</td>
+    <td>{{data_2[17][0]}}</td>
+  </tr>
+  <tr>
+    <th>10:00</th>
+    <td>{{data_2[2][0]}}</td>
+    <td>{{data_2[6][0]}}</td>
+    <td>{{data_2[10][0]}}</td>
+    <td>{{data_2[14][0]}}</td>
+    <td>{{data_2[18][0]}}</td>
+  </tr>
+  <tr>
+    <th>13:00</th>
+    <td>{{data_2[3][0]}}</td>
+    <td>{{data_2[7][0]}}</td>
+    <td>{{data_2[11][0]}}</td>
+    <td>{{data_2[15][0]}}</td>
+    <td>{{data_2[19][0]}}</td>
+  </tr>
+  <tr>
+    <th>15:00</th>
+    <td>{{data_2[4][0]}}</td>
+    <td>{{data_2[8][0]}}</td>
+    <td>{{data_2[12][0]}}</td>
+    <td>{{data_2[16][0]}}</td>
+    <td>{{data_2[20][0]}}</td>
+  </tr>
+</table>
+<br>
+<strong>Ket:</strong>
+<h5><strong>______</strong> : Ada Kegiatan</h5>
+
+
+
+
+{% endblock %}

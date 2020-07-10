@@ -31,15 +31,17 @@
                 <th scope="col">Nama</th>
                 <th scope="col">NIM</th>
                 <th scope="col">*</th>
+								<th></th>
               </tr>
             </thead>
             <tbody>
               {% for i in data%}
-              <tr>
+              <tr onclick="window.location=;">
                 <th scope="row">{{loop.index}}</th>
                 <td>{{i.nama}}</td>
                 <td>{{i.nim}}</td>
                 <td><input type="checkbox" class="chk" value="{{i['_id']}}"></td>
+								<td><a href="/mhstampil/{{i['_id']}}">View</a></td>
               </tr>
               {% endfor %}
             </tbody>
@@ -52,7 +54,8 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nama</th>
-                <th scope="col">*</th>
+								<th scope="col">*</th>
+								<th></th>
               </tr>
             </thead>
             <tbody>
@@ -61,6 +64,7 @@
                 <th scope="row">{{ loop.index }}</th>
                 <td>{{j.nama}}</td>
                 <td><input type="checkbox" class="chk" value="{{j['_id']}}"></td>
+								<td><a href="/dosentampil/{{j['_id']}}">View</a></td>
               </tr>
               {% endfor %}
             </tbody>
@@ -74,6 +78,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Nama</th>
                 <th scope="col">*</th>
+								<th></th>
               </tr>
             </thead>
             <tbody>
@@ -82,6 +87,7 @@
                 <th scope="row">{{ loop.index }}</th>
                 <td>{{k.nama}}</td>
                 <td><input type="checkbox" class="chk" value="{{k['_id']}}"></td>
+								<td><a href="/dosentampil/{{k['_id']}}">View</a></td>
               </tr>
               {% endfor %}
             </tbody>

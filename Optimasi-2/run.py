@@ -141,6 +141,7 @@ def actRancang():
 @app.route('/komputasi')
 def komputasi():
     hitung = db.komputasi.find().sort("fitnes",pymongo.DESCENDING).limit(5)
+
     result = []
     for i in hitung:
         result.append(i)
@@ -173,6 +174,10 @@ def komputasi():
             ruanganList.append(i)
 
     zipdata = zip(result, mhs, dosbing, p1, p2, ruanganList)
+
+    print(result)
+    for i in range(5):
+        simpanTersedia = db.jadwalTerancang.insert({'mhsNama' : dataMhs['nama'], 'dosenNama' : dataPembimbing['nama'], 'p1Nama' : dataPenguji_1['nama'], 'p2Nama' : dataPenguji_2['nama'], 'mhs' : result[i]['mhs'], 'dosen' : result[i]['dosbing'], 'p1' : result[i]['p1'], 'p2' : result[i]['p2']})
     return render_template('hasil.html', my_string="Jadwal Tersedia",  title="Ketersediaan Jadwal", data=result,
     data_2=result_2, zipdata=zipdata, ruanganList=ruanganList)
 
@@ -227,10 +232,25 @@ def ruangan():
     return render_template('ruangan.html',title="Ruangan", data=ruangan)
 
 
-@app.route("/dosentampil")
-def dosentampil():
-    data = db.dataDosen.find_one({"_id":ObjectId("5ef426a94a1a5d997ffea4a3")})
-    return render_template('dosentampil.html',title="jadwal dosen", data=data)
+@app.route("/dosentampil/<string:id>")
+def dosentampil(id):
+    data = db.dataDosen.find_one({'_id': ObjectId(id)})
+    hasil = {}
+
+    for i in range(20):
+        a, b, c = int(data[str(i+1)][0]), int(data[str(i+1)][1]),int(data[str(i+1)][2])
+        hasil[i+1] = pewaktuan(a,b,c)
+    return render_template('dosenTampil.html',title="Data Dosen", data_2=hasil, data=data, my_string="")
+
+@app.route("/mhstampil/<string:id>")
+def mhstampil(id):
+    data = db.dataMhs.find_one({'_id': ObjectId(id)})
+    hasil = {}
+
+    for i in range(20):
+        a, b, c = int(data[str(i+1)][0]), int(data[str(i+1)][1]),int(data[str(i+1)][2])
+        hasil[i+1] = pewaktuan(a,b,c)
+    return render_template('dosenTampil.html',title="Data Mahasiswa", data_2=hasil, data=data, my_string="")
 
 
 if __name__ == '__main__':
