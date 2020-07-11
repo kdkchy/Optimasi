@@ -23,6 +23,7 @@
               <th scope="col">Pembimbing</th>
               <th scope="col" width="300">Narasumber</th>
               <th scope="col" width="450">Judul</th>
+              <th>*</th>
           </tr>
         </thead>
 
@@ -35,11 +36,13 @@
             <td rowspan="2">{{i.dosbing}}</td>
             <td>{{i.p1}}</td>
             <td rowspan="2">{{i.judul}}</td>
+            <td><a href="#" type="button" class="btn btn-success">Terlaksana</a></td>
             </tr>
             <tr>
             <td>{{i.tgl}} / R. {{i.ruangan}}</td>
             <td>{{i.nim}}</td>
             <td>{{i.p2}}</td>
+            <td><a href="/update/{{i.mhs}}" type="button" class="btn btn-primary">Jadwal Ulang</a></td>
         </tr>
         {% endfor %}
 
@@ -57,6 +60,7 @@
               <th scope="col">Pembimbing</th>
               <th scope="col" width="300">Narasumber</th>
               <th scope="col" width="450">Judul</th>
+              <th>*</th>
           </tr>
 
       </thead>
@@ -70,11 +74,13 @@
             <td rowspan="2">{{j.dosbing}}</td>
             <td>{{j.p1}}</td>
             <td rowspan="2">{{j.judul}}</td>
+            <td><a href="#" type="button" class="btn btn-success">Terlaksana</a></td>
             </tr>
             <tr>
             <td>{{j.tgl}} / R. {{j.ruangan}}</td>
             <td>{{j.nim}}</td>
             <td>{{j.p2}}</td>
+            <td><a href="/update/{{j.mhs}}" type="button" class="btn btn-primary">Jadwal Ulang</a></td>
         </tr>
         {% endfor %}
 

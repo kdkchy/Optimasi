@@ -174,13 +174,45 @@ def komputasi():
             ruanganList.append(i)
 
     zipdata = zip(result, mhs, dosbing, p1, p2, ruanganList)
-
-    print(result)
     for i in range(5):
-        simpanTersedia = db.jadwalTerancang.insert({'mhsNama' : dataMhs['nama'], 'dosenNama' : dataPembimbing['nama'], 'p1Nama' : dataPenguji_1['nama'], 'p2Nama' : dataPenguji_2['nama'], 'mhs' : result[i]['mhs'], 'dosen' : result[i]['dosbing'], 'p1' : result[i]['p1'], 'p2' : result[i]['p2']})
+        simpanTersedia = db.jadwalTerancang.insert({'mhsNama' : dataMhs['nama'], 'dosbingNama' : dataPembimbing['nama'], 'p1Nama' : dataPenguji_1['nama'], 'p2Nama' : dataPenguji_2['nama'], 'mhs' : result[i]['mhs'], 'dosbing' : result[i]['dosbing'], 'p1' : result[i]['p1'], 'p2' : result[i]['p2']})
+
+
     return render_template('hasil.html', my_string="Jadwal Tersedia",  title="Ketersediaan Jadwal", data=result,
     data_2=result_2, zipdata=zipdata, ruanganList=ruanganList)
 
+@app.route('/update/<string:id>')
+def update(id):
+    hasil = db.jadwalTerancang.find({"mhsNama" : id})
+
+    result = []
+    for i in hasil:
+        result.append(i)
+
+
+    mhs, dosbing, p1, p2, ruangan = [], [], [], [], []
+    for i in result:
+        a, b, c = int(i.get('mhs')[0]), int(i.get('mhs')[1]),int(i.get('mhs')[2])
+        mhs.append(pewaktuan(a,b,c))
+        a, b, c = int(i.get('dosbing')[0]), int(i.get('dosbing')[1]),int(i.get('dosbing')[2])
+        dosbing.append(pewaktuan(a,b,c))
+        a, b, c = int(i.get('p1')[0]), int(i.get('p1')[1]),int(i.get('p1')[2])
+        p1.append(pewaktuan(a,b,c))
+        a, b, c = int(i.get('p2')[0]), int(i.get('p2')[1]),int(i.get('p2')[2])
+        p2.append(pewaktuan(a,b,c))
+        ruangan.append([b,c])
+
+    ruanganList = []
+    for i in range(len(ruangan)):
+        hasilRuangan = db.ruangan.find({ 'waktu' : ruangan[i]})
+        for i in hasilRuangan:
+            ruanganList.append(i)
+
+    print(mhs)
+
+    zipdata = zip(result, mhs, dosbing, p1, p2, ruanganList)
+    return render_template('hasilUpdate.html', my_string="Ketersediaan Jadwal",  title="Jadwal Ulang", data=result,
+    data_2=result_2, zipdata=zipdata, ruanganList=ruanganList)
 
 @app.route('/actInsert', methods=["POST"])
 def actInsert():
@@ -250,7 +282,7 @@ def mhstampil(id):
     for i in range(20):
         a, b, c = int(data[str(i+1)][0]), int(data[str(i+1)][1]),int(data[str(i+1)][2])
         hasil[i+1] = pewaktuan(a,b,c)
-    return render_template('dosenTampil.html',title="Data Mahasiswa", data_2=hasil, data=data, my_string="")
+    return render_template('mhsTampil.html',title="Data Mahasiswa", data_2=hasil, data=data, my_string="")
 
 
 if __name__ == '__main__':
