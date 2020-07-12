@@ -3,7 +3,7 @@ from pymongo import MongoClient
 import os
 import pymongo
 from bson.objectid import ObjectId
-from komputasi.komputasi import getData, makeData, pewaktuan, simpanPopulasi
+from komputasi.komputasi import getData, makeData, pewaktuan, simpanPopulasi, decode
 import ast
 
 from flask_wtf import Form
@@ -21,6 +21,7 @@ db = client.optimasi
 #Global Variable
 clicked = []
 result_2 = None
+simpanTersedia = None
 
 @app.route("/")
 def home():
@@ -154,7 +155,7 @@ def komputasi():
     dataPenguji_2 = db.dataDosen.find_one({"_id":ObjectId(clicked[3])})
     result_2.extend((dataMhs, dataPembimbing, dataPenguji_1, dataPenguji_2))
 
-    mhs, dosbing, p1, p2, ruangan = [], [], [], [], []
+    mhs, dosbing, p1, p2, ruangan, waktuKode = [], [], [], [], [], []
     for i in result:
         a, b, c = int(i.get('mhs')[0]), int(i.get('mhs')[1]),int(i.get('mhs')[2])
         mhs.append(pewaktuan(a,b,c))
@@ -165,7 +166,10 @@ def komputasi():
         a, b, c = int(i.get('p2')[0]), int(i.get('p2')[1]),int(i.get('p2')[2])
         p2.append(pewaktuan(a,b,c))
         ruangan.append([b,c])
+        a , b = int(i.get('mhs')[1]),int(i.get('mhs')[2])
+        waktuKode.append([decode(a,b), [1,a,b]])
 
+    print(waktuKode)
 
     ruanganList = []
     for i in range(len(ruangan)):
@@ -174,9 +178,11 @@ def komputasi():
             ruanganList.append(i)
 
     zipdata = zip(result, mhs, dosbing, p1, p2, ruanganList)
-    for i in range(5):
-        simpanTersedia = db.jadwalTerancang.insert({'mhsNama' : dataMhs['nama'], 'dosbingNama' : dataPembimbing['nama'], 'p1Nama' : dataPenguji_1['nama'], 'p2Nama' : dataPenguji_2['nama'], 'mhs' : result[i]['mhs'], 'dosbing' : result[i]['dosbing'], 'p1' : result[i]['p1'], 'p2' : result[i]['p2']})
 
+    global simpanTersedia
+    simpanTersedia = []
+    for i in range(len(result)):
+        simpanTersedia.append({'mhsNama' : dataMhs['nama'], 'dosbingNama' : dataPembimbing['nama'], 'p1Nama' : dataPenguji_1['nama'], 'p2Nama' : dataPenguji_2['nama'], 'mhs' : result[i]['mhs'], 'dosbing' : result[i]['dosbing'], 'p1' : result[i]['p1'], 'p2' : result[i]['p2']})
 
     return render_template('hasil.html', my_string="Jadwal Tersedia",  title="Ketersediaan Jadwal", data=result,
     data_2=result_2, zipdata=zipdata, ruanganList=ruanganList)
@@ -208,8 +214,6 @@ def update(id):
         for i in hasilRuangan:
             ruanganList.append(i)
 
-    print(mhs)
-
     zipdata = zip(result, mhs, dosbing, p1, p2, ruanganList)
     return render_template('hasilUpdate.html', my_string="Ketersediaan Jadwal",  title="Jadwal Ulang", data=result,
     data_2=result_2, zipdata=zipdata, ruanganList=ruanganList)
@@ -220,9 +224,6 @@ def actInsert():
         status=request.values.get("status")
         harijam=request.values.get("mhs")
         tgl=request.values.get("tgl")
-        dosbing=request.values.get("dosbing")
-        p1=request.values.get("p1")
-        p2=request.values.get("p2")
         ruangan=request.values.get("ruang")
         judul=request.values.get("judul")
 
@@ -239,7 +240,37 @@ def actInsert():
         "judul" : judul
         })
 
+        db.jadwalTerancang.insert(simpanTersedia)
+
         flash('Jadwal Terancang')
+        return redirect('/')
+    except:
+        return render_template(
+                'msg.html', my_string="Databases Connection Error!", title="Insert")
+    return redirect('/')
+
+@app.route('/actUpdate', methods=["POST"])
+def actUpdate():
+    try:
+        mhsNama=request.values.get("mhsNama")
+        status=request.values.get("status")
+        harijam=request.values.get("mhs")
+        tgl=request.values.get("tgl")
+        ruangan=request.values.get("ruang")
+        judul=request.values.get("judul")
+
+        db.jadwal.update({"mhs" : mhsNama},
+        {
+        "$set": {
+        "status" : status,
+        "harijam" : harijam,
+        "tgl" : tgl,
+        "ruangan" : ruangan,
+        "judul" : judul
+        }})
+
+
+        flash('Jadwal Terancang Ulang')
         return redirect('/')
     except:
         return render_template(

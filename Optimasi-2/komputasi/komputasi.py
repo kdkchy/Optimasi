@@ -137,3 +137,50 @@ def pewaktuan(a,b,c):
 def simpanPopulasi():
     global populasi
     return populasi
+
+def decode(a,b):
+    if a==1:
+        if b==1:
+            return 1
+        elif b==2:
+            return 2
+        elif b==3:
+            return 3
+        else:
+            return 4
+    elif a==2:
+        if b==1:
+            return 5
+        elif b==2:
+            return 6
+        elif b==3:
+            return 7
+        else:
+            return 8
+    elif a==3:
+        if b==1:
+            return 9
+        elif b==2:
+            return 10
+        elif b==3:
+            return 11
+        else:
+            return 12
+    elif a==4:
+        if b==1:
+            return 13
+        elif b==2:
+            return 14
+        elif b==3:
+            return 15
+        else:
+            return 16
+    elif a==5:
+        if b==1:
+            return 17
+        elif b==2:
+            return 18
+        elif b==3:
+            return 19
+        else:
+            return 20

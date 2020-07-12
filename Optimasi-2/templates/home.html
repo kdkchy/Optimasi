@@ -42,7 +42,7 @@
             <td>{{i.tgl}} / R. {{i.ruangan}}</td>
             <td>{{i.nim}}</td>
             <td>{{i.p2}}</td>
-            <td><a href="/update/{{i.mhs}}" type="button" class="btn btn-primary">Jadwal Ulang</a></td>
+            <td><a href="/update/{{i.mhs}}" method="POST" type="button" class="btn btn-primary">Jadwal Ulang</a></td>
         </tr>
         {% endfor %}
 
@@ -80,7 +80,7 @@
             <td>{{j.tgl}} / R. {{j.ruangan}}</td>
             <td>{{j.nim}}</td>
             <td>{{j.p2}}</td>
-            <td><a href="/update/{{j.mhs}}" type="button" class="btn btn-primary">Jadwal Ulang</a></td>
+            <td><a href="/update/{{j.mhs}}" method="POST" type="button" class="btn btn-primary">Jadwal Ulang</a></td>
         </tr>
         {% endfor %}
 
