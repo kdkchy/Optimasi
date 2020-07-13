@@ -119,4 +119,3 @@ rumus salah ketika mencari produk di YZ
 flowchar salah
 rumus kondisi akar salah
 tidak bagus dalam mengimplementasikan metode seleksi dan rekombinasi
-<!-- -->

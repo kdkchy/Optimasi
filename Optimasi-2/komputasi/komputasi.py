@@ -184,3 +184,65 @@ def decode(a,b):
             return 19
         else:
             return 20
+
+def terjadwal(a):
+    if a==1:
+        x = [1,1,1]
+        return x
+    elif a==2:
+        x = [1,1,2]
+        return x
+    elif a==3:
+        x = [1,1,3]
+        return x
+    elif a==4:
+        x = [1,1,4]
+        return x
+    elif a==5:
+        x = [1,2,1]
+        return x
+    elif a==6:
+        x = [1,2,2]
+        return x
+    elif a==7:
+        x = [1,2,3]
+        return x
+    elif a==8:
+        x = [1,2,4]
+        return x
+    elif a==9:
+        x = [1,3,1]
+        return x
+    elif a==10:
+        x = [1,3,2]
+        return x
+    elif a==11:
+        x = [1,3,3]
+        return x
+    elif a==12:
+        x = [1,3,4]
+        return x
+    elif a==13:
+        x = [1,4,1]
+        return x
+    elif a==14:
+        x = [1,4,2]
+        return x
+    elif a==15:
+        x = [1,4,3]
+        return x
+    elif a==16:
+        x = [1,4,4]
+        return x
+    elif a==17:
+        x = [1,5,1]
+        return x
+    elif a==18:
+        x = [1,5,2]
+        return x
+    elif a==19:
+        x = [1,5,3]
+        return x
+    else:
+        x = [1,5,4]
+        return x

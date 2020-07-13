@@ -52,10 +52,8 @@
               </tr>
               <tr>
                 <form action="/actInsert" method="POST">
-                 <input type="hidden" class="form-control" name="mhs" value="{{mhs[1]}} / {{mhs[2]}}">
-                 <input type="hidden" class="form-control" name="dosbing" value="{{i.dosbing}}">
-                 <input type="hidden" class="form-control" name="p1" value="{{i.p1}}">
-                 <input type="hidden" class="form-control" name="p2" value="{{i.p2}}">
+                <input type="hidden" class="form-control" name="mhs" value="{{mhs[1]}} / {{mhs[2]}}">
+                <input type="hidden" name="angkaLoop" value="{{loop.index}}">
                 <td  style="width: 200px;">
                 <select class="form-control" id="ruang" name="ruang">
                   {%for j in range(ruanganList.ruangan| length)%}
