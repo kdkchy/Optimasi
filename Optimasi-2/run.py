@@ -183,17 +183,14 @@ def komputasi():
             ruanganList.append(i)
 
     zipdata = zip(result, mhs, dosbing, p1, p2, ruanganList)
-
-    global simpanTersedia
-    simpanTersedia = []
-    for i in range(len(result)):
-        simpanTersedia.append({'mhsNama' : dataMhs['nama'], 'dosbingNama' : dataPembimbing['nama'], 'p1Nama' : dataPenguji_1['nama'], 'p2Nama' : dataPenguji_2['nama'], 'mhs' : result[i]['mhs'], 'dosbing' : result[i]['dosbing'], 'p1' : result[i]['p1'], 'p2' : result[i]['p2']})
+    print(result_2)
 
     return render_template('hasil.html', my_string="Jadwal Tersedia",  title="Ketersediaan Jadwal", data=result,
     data_2=result_2, zipdata=zipdata, ruanganList=ruanganList)
 
 @app.route('/actInsert', methods=["POST"])
 def actInsert():
+
     try:
         status=request.values.get("status")
         harijam=request.values.get("mhs")
@@ -229,6 +226,24 @@ def actInsert():
         }
         })
 
+        db.dataDosen.update({"nip" : result_2[1].get('nip')},
+        {"$set" : {
+        x : y
+        }
+        })
+
+        db.dataDosen.update({"nip" : result_2[2].get('nip')},
+        {"$set" : {
+        x : y
+        }
+        })
+
+        db.dataDosen.update({"nip" : result_2[3].get('nip')},
+        {"$set" : {
+        x : y
+        }
+        })
+
 
         flash('Jadwal Terancang')
         return redirect('/')
@@ -249,15 +264,81 @@ def delete(id,status):
     mhsNama=result[0].get('mhs')
     kMhs=result[0].get('Kmhs')
 
-    print(k)
+    dsbingNama=result[0].get('dosbing')
+    kDsb=result[0].get('Kdosbing')
+
+    p1Nama=result[0].get('p1')
+    kp1=result[0].get('Kp1')
+
+    p2Nama=result[0].get('p2')
+    kp2=result[0].get('Kp2')
 
     db.dataMhs.update({"nama" : mhsNama},
     {"$set" : {
     k : kMhs
     }})
 
+    db.dataDosen.update({"nama" : dsbingNama},
+    {"$set" : {
+    k : kDsb
+    }})
+
+    db.dataDosen.update({"nama" : p1Nama},
+    {"$set" : {
+    k : kp1
+    }})
+
+    db.dataDosen.update({"nama" : p2Nama},
+    {"$set" : {
+    k : kp2
+    }})
+
     hasil = db.jadwal.remove({"nim" : id, "status" : status})
     return render_template('msg.html', my_string="Jadwal Terlaksana!", title="Terlaksana")
+
+@app.route('/jadwalUlang/<string:id>/<string:status>')
+def jadwalUlang(id,status):
+    hasil = db.jadwal.find({"nim" : id, "status" : status})
+
+    result = []
+    for i in hasil:
+        result.append(i)
+
+    k=str(result[0].get('K'))
+    mhsNama=result[0].get('mhs')
+    kMhs=result[0].get('Kmhs')
+
+    dsbingNama=result[0].get('dosbing')
+    kDsb=result[0].get('Kdosbing')
+
+    p1Nama=result[0].get('p1')
+    kp1=result[0].get('Kp1')
+
+    p2Nama=result[0].get('p2')
+    kp2=result[0].get('Kp2')
+
+    db.dataMhs.update({"nama" : mhsNama},
+    {"$set" : {
+    k : kMhs
+    }})
+
+    db.dataDosen.update({"nama" : dsbingNama},
+    {"$set" : {
+    k : kDsb
+    }})
+
+    db.dataDosen.update({"nama" : p1Nama},
+    {"$set" : {
+    k : kp1
+    }})
+
+    db.dataDosen.update({"nama" : p2Nama},
+    {"$set" : {
+    k : kp2
+    }})
+
+    hasil = db.jadwal.remove({"nim" : id, "status" : status})
+    return redirect('/rancang')
 
 
 @app.route('/populasi')

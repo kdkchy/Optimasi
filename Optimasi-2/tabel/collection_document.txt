@@ -119,3 +119,4 @@ rumus salah ketika mencari produk di YZ
 flowchar salah
 rumus kondisi akar salah
 tidak bagus dalam mengimplementasikan metode seleksi dan rekombinasi
+https://www.fosslinux.com/39384/switching-between-python-2-and-3-versions-on-ubuntu-20-04.htm
