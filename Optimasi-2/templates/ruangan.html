@@ -1,96 +1,119 @@
 {% extends "layout.html" %}
 {% block title %}{{title}}{% endblock %}
-{% block page %}{{title}}
-{% endblock %}
+{% block page %}{{title}}{% endblock %}
+
 {% block content %}
 
   <h3>{{my_string}}</h3>
 
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+      <th width="50">/</th>
+      <th width="100">Senin</th>
+      <th width="100">Selasa</th>
+      <th width="100">Rabu</th>
+      <th width="100">Kamis</th>
+      <th width="100">Jumat</th>
+    </tr></thead>
 
-  <table class="table table-bordered" id="cssTable">
-        <thead>
-              <tr>
-                  <th scope="col">/</th>
-                  <th scope="col" width="250">Senin</th>
-                  <th scope="col" width="250">Selasa</th>
-                  <th scope="col" width="250">Rabu</th>
-                  <th scope="col" width="250">Kamis</th>
-                  <th scope="col" width="250">Jumat</th>
-              </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>08.00</th>
-              <td>
-              {{data[0].ruangan}}
-              </td>
-              <td>
-              {{data[4].ruangan}}
-              </td>
-              <td>
-              {{data[8].ruangan}}
-              </td>
-              <td>
-              {{data[12].ruangan}}
-              </td>
-              <td>
-              {{data[16].ruangan}}
-              </td>
-            </tr>
-            <tr>
-              <th>08.00</th>
-              <td>
-              {{data[1].ruangan}}
-              </td>
-              <td>
-              {{data[5].ruangan}}
-              </td>
-              <td>
-              {{data[9].ruangan}}
-              </td>
-              <td>
-              {{data[13].ruangan}}
-              </td>
-              <td>
-              {{data[17].ruangan}}
-              </td>
-            </tr>
-            <tr>
-              <th>08.00</th>
-              <td>
-              {{data[2].ruangan}}
-              </td>
-              <td>
-              {{data[6].ruangan}}
-              </td>
-              <td>
-              {{data[10].ruangan}}
-              </td>
-              <td>
-              {{data[14].ruangan}}
-              </td>
-              <td>
-              {{data[18].ruangan}}
-              </td>
-            </tr>
-            <tr>
-              <th>08.00</th>
-              <td>
-              {{data[3].ruangan}}
-              </td>
-              <td>
-              {{data[7].ruangan}}
-              </td>
-              <td>
-              {{data[11].ruangan}}
-              </td>
-              <td>
-              {{data[15].ruangan}}
-              </td>
-              <td>
-              {{data[19].ruangan}}
-              </td>
-            </tr>
-          </tbody>
+    <tbody>
+      <tr>
+        <th>08.00</th>
+        <td>{% for i in data[0].ruangan%}
+          {{i}} / 
+          {% endfor %}
+        </td>
+        <td>{% for i in data[4].ruangan%}
+          {{i}} / 
+          {% endfor %}
+        </td>
+        <td>{% for i in data[8].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+        <td>{% for i in data[12].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+        <td>{% for i in data[16].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+      </tr>
+      <tr>
+        <th>10.00</th>
+        <td>{% for i in data[1].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+        <td>{% for i in data[5].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+        <td>{% for i in data[9].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+        <td>{% for i in data[13].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+        <td>{% for i in data[17].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+      </tr>
+      <tr>
+        <th>13.00</th>
+        <td>{% for i in data[2].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+        <td>{% for i in data[6].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+        <td>{% for i in data[10].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+        <td>{% for i in data[14].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+        <td>{% for i in data[18].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+      </tr>
+      <tr>
+        <th>15.00</th>
+        <td>{% for i in data[3].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+        <td>{% for i in data[7].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+        <td>{% for i in data[11].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+        <td>{% for i in data[15].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+        <td>{% for i in data[19].ruangan%}
+          {{i}} /
+          {% endfor %}
+        </td>
+      </tr>
+    </tbody>
+    
+  </table>
+
+  
 
 {% endblock %}

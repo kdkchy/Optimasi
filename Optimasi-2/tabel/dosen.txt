@@ -334,3 +334,6 @@ db.dataDosen.insert({
 "17" : [ 0, 5, 1 ], "18" : [ 0, 5, 2 ], "19" : [ 0, 5, 3 ], "20" : [ 0, 5, 4 ],
 "nama" : "A-None", "nip" : "000"
 })
+
+
+db.dataDosen.createIndex({"nip":1},{unique:true});

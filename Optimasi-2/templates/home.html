@@ -1,6 +1,21 @@
+
 {% extends "layout.html" %}
 {% block title %}{{title}}{% endblock %}
 {% block page %}
+<div class="jumbotron text-center" style="background-color: white;">
+  <h1>Selamat Datang!</h1>
+  <h2 style="font-size: 40px;">Optimasi Penjadwalan Pra Skripsi dan Skripsi Menggunakan Metode Algoritma Genetika</h2>
+  <br>
+  <img src={{ url_for('static', filename='akakom.png') }} style="width: 500px;">
+  <br>
+  <br>
+  <h2><i>Pande Kadek Cahya Wisnu Murti</i></h2>
+  <h3 style="color: black;">165410137</h3>  
+</div>
+
+  <br>
+  <hr class="my-4">
+  <br>
   {{title}}
   {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -89,5 +104,7 @@
   <br>
 
 
-
 {% endblock %}
+
+
+

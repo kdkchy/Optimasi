@@ -109,6 +109,7 @@ def actinputDosen():
             data.append(a)
 
         nama = request.form.get('nama')
+        nip = request.form.get('nip')
 
         db.dataDosen.insert({
         "1":data[1],"2":data[2],"3":data[3],"4":data[4],
@@ -116,7 +117,7 @@ def actinputDosen():
         "9":data[9],"10":data[10],"11":data[11],"12":data[12],
         "13":data[13],"14":data[14],"15":data[15],"16":data[16],
         "17":data[17],"18":data[18],"19":data[19],"20":data[20],
-        "nama": nama
+        "nama": nama, "nip" : nip
         })
 
 
