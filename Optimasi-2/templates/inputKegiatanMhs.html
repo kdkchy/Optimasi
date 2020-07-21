@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block page %}{{title}}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <h4><i>{{ message }}</i></h4>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+{% endblock %}
+{% block content %}
+
+  <h3>{{my_string}}</h3>
+  <div class="insert">
+    
+    <form action="/actInputKegiatanMhs" method="POST">
+        <div class="form-group">
+            {% for i in hari %}
+            <input type="hidden" name="dataId" value="{{dataId}}">
+            <label for="">{{i[1][1]}} / {{i[1][2]}}</label><input type="text" name="{{i[0]}}" class="form-control" style="width: 300px;">
+            {% endfor %}
+        </div>
+
+        <hr>
+        <button type="submit" class="btn btn-primary">Tambahkan</button>
+    </form>
+  </div>
+
+{% endblock %}

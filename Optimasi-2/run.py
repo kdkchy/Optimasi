@@ -22,6 +22,7 @@ db = client.optimasi
 clicked = []
 result_2 = None
 waktuKode = None
+hariKegiatan = None
 
 @app.route("/")
 def home():
@@ -66,7 +67,7 @@ def rancang():
 def inputMhs():
     return render_template('inputMhs.html', title="Input Mahasiswa", my_string="Lengkapi Data")
 
-@app.route("/actinputMhs", methods=["POST"])
+@app.route("/actinputMhs", methods=["POST", "GET"])
 def actinputMhs():
     try:
         data = [""]
@@ -87,13 +88,55 @@ def actinputMhs():
         "nim" : nim,
         })
 
-
-        flash('Data Tersimpan!')
-        return redirect('/inputMhs')
+        flash('Lengkapi Matakuliah!')
+        return redirect(url_for('inputKegiatanMhs', nim=nim))
     except:
         return render_template(
-                'msg.html', my_string="Databases Connection Error!", title="Insert")
+                'msg.html', my_string="Id Sama!", title="Insert")
+    return render_template('inputMhs.html', title="Input Mahasiswa", my_string="Lengkapi Data")
 
+@app.route("/inputKegiatanMhs/<nim>")
+def inputKegiatanMhs(nim):
+    data = db.dataMhs.find({"nim" : nim})
+    dataId = nim
+
+    hasil = {}
+    for i in range(20):
+        hasil[i+1] = data[0].get(str(i+1))
+
+    hasil_2 = {}
+    global hariKegiatan
+    hariKegiatan = []
+    for i in range(20):
+        if(hasil[i+1][0]==1):
+            hasil_2[i+1] = [str(i+1), hasil[i+1]]
+            hariKegiatan.append([str(i+1), pewaktuan(1,hasil_2[i+1][1][1],hasil_2[i+1][1][2])])
+            
+    return render_template('inputKegiatanMhs.html', title="Input Kegiatan", my_string="Tambahkan Matakuliah", hari=hariKegiatan, dataId=dataId)
+
+@app.route("/actInputKegiatanMhs", methods=["POST"])
+def actInputKegiatanMhs():
+    try:
+        nim = request.values.get('dataId')
+
+
+
+        dataTabel = {}
+        print(hariKegiatan[0])
+        for i in range(len(hariKegiatan)):
+            dataTabel[hariKegiatan[i][0]] = request.values.get(hariKegiatan[i][0])
+
+        dataTabel['nim'] = nim
+
+        db.jadwalMhs.insert(
+        dataTabel
+        )
+
+        flash('Data Tersimpan!')
+        return redirect(url_for('inputMhs'))
+    except:
+        return render_template(
+                'msg.html', my_string="Gagal Tersimpan!", title="Insert")
     return render_template('inputMhs.html', title="Input Mahasiswa", my_string="Lengkapi Data")
 
 @app.route("/inputDosen")
@@ -108,8 +151,8 @@ def actinputDosen():
             a = ast.literal_eval(str(request.form.get(str(i+1))))
             data.append(a)
 
-        nama = request.form.get('nama')
-        nip = request.form.get('nip')
+        nama = request.values.get('nama')
+        nip = request.values.get('nip')
 
         db.dataDosen.insert({
         "1":data[1],"2":data[2],"3":data[3],"4":data[4],
@@ -121,14 +164,55 @@ def actinputDosen():
         })
 
 
-        flash('Data Tersimpan!')
-        return redirect('/inputDosen')
+        flash('Lengkapi Matakuliah!')
+        return redirect(url_for('inputKegiatanDosen', nip=nip))
     except:
         return render_template(
-                'msg.html', my_string="Databases Connection Error!", title="Insert")
+                'msg.html', my_string="Id Sama", title="Insert")
 
     return render_template('inputDosen.html',title="Input Dosen", my_string="Lengkapi Data")
 
+@app.route("/inputKegiatanDosen/<nip>")
+def inputKegiatanDosen(nip):
+    data = db.dataDosen.find({"nip" : nip})
+    dataId = nip
+
+    hasil = {}
+    for i in range(20):
+        hasil[i+1] = data[0].get(str(i+1))
+
+    hasil_2 = {}
+    global hariKegiatan
+    hariKegiatan = []
+    for i in range(20):
+        if(hasil[i+1][0]==1):
+            hasil_2[i+1] = [str(i+1), hasil[i+1]]
+            hariKegiatan.append([str(i+1), pewaktuan(1,hasil_2[i+1][1][1],hasil_2[i+1][1][2])])
+            
+    return render_template('inputKegiatanDosen.html', title="Input Kegiatan", my_string="Tambahkan Matakuliah", hari=hariKegiatan, dataId=dataId)
+
+@app.route("/actInputKegiatanDosen", methods=["POST"])
+def actInputKegiatanDosen():
+    try:
+        nip = request.values.get('nip')
+
+        dataTabel = {}
+        print(hariKegiatan[0])
+        for i in range(len(hariKegiatan)):
+            dataTabel[hariKegiatan[i][0]] = request.values.get(hariKegiatan[i][0])
+
+        dataTabel['nip'] = nip
+
+        db.jadwalDosen.insert( 
+        dataTabel
+        )
+
+        flash('Data Tersimpan!')
+        return redirect(url_for('inputDosen'))
+    except:
+        return render_template(
+                'msg.html', my_string="Gagal Tersimpan!", title="Insert")
+    return render_template('inputDosen.html', title="Input Dosen", my_string="Lengkapi Data")
 
 @app.route('/actRancang', methods=['POST'])
 def actRancang():
@@ -363,21 +447,85 @@ def ruangan():
 @app.route("/dosentampil/<string:id>")
 def dosentampil(id):
     data = db.dataDosen.find_one({'_id': ObjectId(id)})
-    hasil = {}
+    nip=data.get('nip')
+    data_2 = db.jadwalDosen.find_one({'nip' : nip})
 
+    hasil = {}
     for i in range(20):
-        a, b, c = int(data[str(i+1)][0]), int(data[str(i+1)][1]),int(data[str(i+1)][2])
-        hasil[i+1] = pewaktuan(a,b,c)
+        hasil[i+1]= data_2.get(str(i+1))
+
     return render_template('dosenTampil.html',title="Data Dosen", data_2=hasil, data=data, my_string="")
+
+@app.route("/dosenUpdate/<string:id>")
+def dosenUpdate(id):
+    data = db.dataDosen.find_one({"nip" : id})
+
+    return render_template('dosenUpdate.html',title="Update Kegiatan", data=data)
+
+@app.route("/actupdateDosen", methods=["POST"])
+def actupdateDosen():
+    try:
+        nip=request.values.get("nip")
+        kegiatan=request.values.get("kegiatan")
+        x=request.values.get("harijam")
+        y=terjadwal(x)
+
+        db.dataDosen.update({"nip" : nip},
+        {"$set" : {
+        x : y
+        }
+        })
+
+        y[0]=0
+        db.jadwalDosen.update({"nip" : nip},
+        {"$set" : {
+        x : kegiatan,
+        "kode" : [int(x),y]
+        }
+        })
+
+
+        flash('Jadwal Terupdate')
+        return redirect('/rancang')
+    except:
+        return render_template(
+                'msg.html', my_string="Databases Connection Error!", title="Insert")
+    return redirect('/rancang')
+    
+@app.route("/dosenReset/<string:id>")
+def dosenReset(id):
+    data = db.jadwalDosen.find_one({"nip" : id})
+    k=data.get('kode')
+
+    x=str(k[0])
+    y=k[1]
+    
+
+    db.dataDosen.update({"nip" : id},
+        {"$set" : {
+        x : y
+        }
+        })
+
+    db.jadwalDosen.update({"nip" : id},
+        {"$set" : {
+        x : "",
+        "kode" : ""
+        }
+        })
+
+    return redirect('/rancang')
+
 
 @app.route("/mhstampil/<string:id>")
 def mhstampil(id):
     data = db.dataMhs.find_one({'_id': ObjectId(id)})
-    hasil = {}
+    nim=data.get('nim')
+    data_2 = db.jadwalMhs.find_one({'nim' : nim})
 
+    hasil = {}
     for i in range(20):
-        a, b, c = int(data[str(i+1)][0]), int(data[str(i+1)][1]),int(data[str(i+1)][2])
-        hasil[i+1] = pewaktuan(a,b,c)
+        hasil[i+1]= data_2.get(str(i+1))
     return render_template('mhsTampil.html',title="Data Mahasiswa", data_2=hasil, data=data, my_string="")
 
 

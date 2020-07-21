@@ -1,0 +1,331 @@
+
+db.jadwalDosen.insert({
+"1" : "", "2" : "", "3" : "Algoritma dan Pemrograman Lanjut", "4" : "",
+"5" : "Praktikum Algoritma dan Pemrograman Lanjut", "6" : "Praktikum Algoritma dan Pemrograman Lanjut", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "Algoritma dan Pemrograman Lanjut", "12" : "",
+"13" : "Praktikum Algoritma dan Pemrograman Lanjut", "14" : "Praktikum Algoritma dan Pemrograman Lanjut", "15" : "", "16" : "Sistem Basis Data",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "001"
+})
+
+db.jadwalDosen.insert({
+    "1" : "Pemrograman Berorientasi Objek", "2" : "", "3" : "", "4" : "Praktikum Pemrograman Berorientasi Objek",
+"5" : "", "6" : "Algoritma dan Pemrograman Lanjut", "7" : "Praktikum Algoritma dan Pemrograman Lanjut", "8" : "Praktikum Algoritma dan Pemrograman Lanjut",
+"9" : "", "10" : "", "11" : "Pemrograman Berorientasi Objek", "12" : "",
+"13" : "Praktikum Pemrograman Berorientasi Objek", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "002"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "Algoritma dan Pemrograman Lanjut", "6" : "", "7" : "", "8" : "",
+"9" : "Algoritma dan Pemrograman Lanjut", "10" : "", "11" : "", "12" : "",
+"13" : "Praktikum Algoritma dan Pemrograman Lanjut", "14" : "Praktikum Algoritma dan Pemrograman Lanjut", "15" : "Praktikum Algoritma dan Pemrograman Lanjut", "16" : "Praktikum dan Pemrograman Lanjut",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "003"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "Aljabar Vektor dan Matriks",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "004"
+})
+
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "Aljabar Vektor dan Matriks", "3" : "", "4" : "Aljabar Vektor dan Matriks",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "Matematika Komputasi", "10" : "Matematika Komputasi", "11" : "", "12" : "Aljabar Vektor dan Matriks",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "005"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "Jaringan Nirkabel", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "Matematika Komputasi", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "006"
+})
+
+db.jadwalDosen.insert({
+    "1" : "Jaringan Nirkabel", "2" : "", "3" : "", "4" : "",
+"5" : "Pemrograman Berorientasi Objek", "6" : "", "7" : "Pemrograman Web Client", "8" : "",
+"9" : "", "10" : "", "11" : "", "12" : "Praktikum Pemrograman Berorientasi Objek",
+"13" : "", "14" : "Praktikum Pemrograman Web Client", "15" : "Jaringan Nirkabel", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "007"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "Jaringan Nirkabel", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "008"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "Jaringan Nirkabel", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "009"
+})
+
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "Pengenalan Basis Data", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "Kecerdasan Buatan", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "010"
+})
+
+
+db.jadwalDosen.insert({
+    "1" : "Kecerdasan Buatan", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "", "12" : "Kecerdasan Buatan",
+"13" : "", "14" : "Jaringan Syaraf Tiruan", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "011"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "Kecerdasan Buatan", "7" : "", "8" : "",
+"9" : "", "10" : "Sistem Basis Data", "11" : "", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "012"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "Kecerdasan Buatan",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "", "14" : "Teknik Kompilasi", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "013"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "Statistika Modeling", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "Matematika Komputasi",
+"nip" : "014"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "Pemrograman Web Client", "4" : "",
+"5" : "Praktikum Pemrograman Web Client", "6" : "", "7" : "Pemrograman Web Client", "8" : "",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "Praktikum Pemrograman Web Client",
+"nip" : "015"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "Pemrograman Web Client", "4" : "Praktikum Pemrograman Web Client",
+"5" : "", "6" : "", "7" : "", "8" : "Rekayasa Perangkat Lunak",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "016"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "Pemrograman Web Server Side", "10" : "", "11" : "Praktikum Pemrograman Web Server Side", "12" : "",
+"13" : "", "14" : "", "15" : "Pemrograman Web Client", "16" : "Praktikum Pemrograman Web Client",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "017"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "Basis Data Non Relational", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "Basis Data Non Relational", "10" : "", "11" : "", "12" : "Sistem Basis Data",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "Sistem Basis Data",
+"nip" : "018"
+})
+
+db.jadwalDosen.insert({
+    "1" : "Sistem Basis Data", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "Workshop SQL",
+"nip" : "019"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "Statistika Modeling",
+"nip" : "020"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "Statistika Modeling", "11" : "", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "021"
+})
+
+db.jadwalDosen.insert({
+    "1" : "Statistika Modeling", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "", "14" : "Statistika Modeling", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "022"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "Pemrograman Web Server Side", "8" : "",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "Basis Data Non Relational", "14" : "", "15" : "Praktikum Pemrograman Web Server Side", "16" : "Praktikum Pemrograman Web Server Side",
+"17" : "", "18" : "Pemrograman Web Server Side", "19" : "Praktikum Pemrograman Web Server Side", "20" : "Praktikum Pemrograman Web Server Side",
+"nip" : "023"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "Bahasa Inggris III", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "Bahasa Inggris III",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "Bahasa Inggris II", "19" : "", "20" : "",
+"nip" : "024"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "Bahasa Inggris IV", "3" : "", "4" : "",
+"5" : "Bahasa Inggris II", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "Bahasa Inggris III",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "025"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "Keamanan Sistem", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "Keamanan Sistem", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "026"
+})
+
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "Pemrograman Web Mobile", "6" : "", "7" : "Pemrograman Web Mobile", "8" : "",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "", "14" : "Pengenalan Big Data", "15" : "Pengenalan Big Data", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "028"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "Pengembangan Diri", "4" : "",
+"5" : "", "6" : "", "7" : "Rekayasa Perangkat Lunak", "8" : "",
+"9" : "Pendidikan Bahasa Indonesia", "10" : "", "11" : "Pengembangan Diri", "12" : "",
+"13" : "", "14" : "Rekayasa Perangkat Lunak", "15" : "Pendidikan Bahasa Indonesia", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "029"
+})
+
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "Pendidikan Bahasa Indonesia", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "030"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "Workshop Augmented Reality", "10" : "", "11" : "", "12" : "",
+"13" : "Workshop Sensorflow", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "Pemrograman Web Mobile", "20" : "",
+"nip" : "031"
+})
+
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "Pengembangan Diri", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "Digipreneur",
+"17" : "", "18" : "", "19" : "Uji Kualitas Perangkat Lunak", "20" : "Digipreneur",
+"nip" : "032"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "Big Data Analytics",
+"5" : "", "6" : "Praktikum Big Data Analytics", "7" : "", "8" : "Big Data Analytics",
+"9" : "Big Data Analytics", "10" : "", "11" : "", "12" : "Praktikum Big Data Analytics",
+"13" : "", "14" : "", "15" : "", "16" : "Praktikum Big Data Analytics",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "033"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "Framework Web", "11" : "", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "034"
+})
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "Sistem Auditor",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "027"
+})
+
+db.jadwalDosen.insert({
+    "1" : "Workshop Julia", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "Workshop Python",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "035"
+})
+
+
+db.jadwalDosen.insert({
+    "1" : "", "2" : "", "3" : "", "4" : "",
+"5" : "", "6" : "", "7" : "", "8" : "",
+"9" : "", "10" : "", "11" : "", "12" : "",
+"13" : "", "14" : "", "15" : "", "16" : "",
+"17" : "", "18" : "", "19" : "", "20" : "",
+"nip" : "000"
+})

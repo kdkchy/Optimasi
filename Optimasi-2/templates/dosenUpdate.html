@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block page %}{{title}}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <h4><i>{{ message }}</i></h4>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+{% endblock %}
+{% block content %}
+
+  <h3>{{my_string}}</h3>
+    <h3>{{data['nama']}}</h3>
+    <form action="/actupdateDosen" method="POST">
+        <div class="form-group">
+            <label for="">Pilih Hari dan Jam</label>
+            <input type="hidden" name="nip" value="{{data['nip']}}">
+            <select name="harijam" class="form-control" style="width: 250px;">
+              <option selected>Pilih...</option>
+              <option value="1">Senin / 08:00</option>
+              <option value="2">Senin / 10:00</option>
+              <option value="3">Senin / 13:00</option>
+              <option value="4">Senin / 15:00</option>
+
+              <option value="5">Selasa / 08:00</option>
+              <option value="6">Selasa / 10:00</option>
+              <option value="7">Selasa / 13:00</option>
+              <option value="8">Selasa / 15:00</option>
+
+              <option value="9">Rabu / 08:00</option>
+              <option value="10">Rabu / 10:00</option>
+              <option value="11">Rabu / 13:00</option>
+              <option value="12">Rabu / 15:00</option>
+
+              <option value="13">Kamis / 08:00</option>
+              <option value="14">Kamis / 10:00</option>
+              <option value="15">Kamis / 13:00</option>
+              <option value="16">Kamis / 15:00</option>
+
+              <option value="17">Jumat / 08:00</option>
+              <option value="18">Jumat / 10:00</option>
+              <option value="19">Jumat / 13:00</option>
+              <option value="20">Jumat / 15:00</option>
+            </select>
+            <br>
+            <label for="">Nama Kegiatan</label>
+            <input type="text" name="kegiatan" class="form-control" style="width: 500px;"">
+        </div>
+        <br>
+        <hr>
+        <button type="submit" class="btn btn-primary">Tambahkan</button>
+    </form>
+
+
+{% endblock %}
