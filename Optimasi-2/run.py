@@ -268,14 +268,13 @@ def komputasi():
             ruanganList.append(i)
 
     zipdata = zip(result, mhs, dosbing, p1, p2, ruanganList)
-    print(result_2)
+    # print(result_2)
 
     return render_template('hasil.html', my_string="Jadwal Tersedia",  title="Ketersediaan Jadwal", data=result,
     data_2=result_2, zipdata=zipdata, ruanganList=ruanganList)
 
 @app.route('/actInsert', methods=["POST"])
 def actInsert():
-
     try:
         status=request.values.get("status")
         harijam=request.values.get("mhs")
@@ -292,8 +291,11 @@ def actInsert():
         "mhs" : result_2[0].get('nama'),
         "nim" : result_2[0].get('nim'),
         "dosbing" : result_2[1].get('nama'),
+        "dosbingNIP" : result_2[1].get('nip'),
         "p1" : result_2[2].get('nama'),
+        "p1NIP" : result_2[2].get('nip'),
         "p2" : result_2[3].get('nama'),
+        "p2NIP" : result_2[3].get('nip'),
         "judul" : judul,
         "K" : waktuKode[loop-1][0],
         "Kmhs" : waktuKode[loop-1][1][0],
@@ -304,31 +306,65 @@ def actInsert():
 
         x = str(waktuKode[loop-1][0])
         y = terjadwal(waktuKode[loop-1][0])
+        z = "Ujian "+status
+        zz = "Pembimbing "+status
+        zzz = "Narasumber "+status
+
+        #pencarian ruangan
+        waktu = [y[1],y[2]]
+        print(waktu)
+        dataR = db.ruangan.find_one({"waktu" : waktu})
+        r = dataR.get('ruangan')
+        print(dataR)
+        new = []
+        for i in r:
+            new.append(i.replace(ruangan,"-"))
+        
+        db.ruangan.update({"waktu" : waktu}, 
+        {"$set" : { "ruangan" : new}})
 
         db.dataMhs.update({"nim" : result_2[0].get('nim')},
         {"$set" : {
         x : y
         }
         })
+        db.jadwalMhs.update({"nim" : result_2[0].get('nim')},
+        { "$set" :{ 
+        x : z }
+        })
+
 
         db.dataDosen.update({"nip" : result_2[1].get('nip')},
         {"$set" : {
         x : y
         }
         })
+        db.jadwalDosen.update({"nip" : result_2[1].get('nip')},
+        {"$set" : { 
+        x : zz
+        }})
+
 
         db.dataDosen.update({"nip" : result_2[2].get('nip')},
         {"$set" : {
         x : y
         }
         })
+        db.jadwalDosen.update({"nip" : result_2[2].get('nip')},
+        {"$set" : { 
+        x : zzz
+        }})
+
 
         db.dataDosen.update({"nip" : result_2[3].get('nip')},
         {"$set" : {
         x : y
         }
         })
-
+        db.jadwalDosen.update({"nip" : result_2[3].get('nip')},
+        {"$set" : { 
+        x : zzz
+        }})
 
         flash('Jadwal Terancang')
         return redirect('/')
@@ -351,32 +387,60 @@ def delete(id,status):
 
     dsbingNama=result[0].get('dosbing')
     kDsb=result[0].get('Kdosbing')
+    dNip=result[0].get('dosbingNIP')
 
     p1Nama=result[0].get('p1')
     kp1=result[0].get('Kp1')
+    p1Nip=result[0].get('p1NIP')
 
     p2Nama=result[0].get('p2')
     kp2=result[0].get('Kp2')
+    p2Nip=result[0].get('p2NIP')
+
+    kosong = ""
 
     db.dataMhs.update({"nama" : mhsNama},
     {"$set" : {
     k : kMhs
     }})
-
     db.dataDosen.update({"nama" : dsbingNama},
     {"$set" : {
     k : kDsb
     }})
-
     db.dataDosen.update({"nama" : p1Nama},
     {"$set" : {
     k : kp1
     }})
-
     db.dataDosen.update({"nama" : p2Nama},
     {"$set" : {
     k : kp2
     }})
+
+    db.jadwalMhs.update({"nim" : id},
+    {"$set" : {
+    k : kosong
+    }})
+    db.jadwalDosen.update({"nip" : dNip},{"$set" :{
+    k : kosong
+    }})
+    db.jadwalDosen.update({"nip" : p1Nip},{"$set" :{
+    k : kosong
+    }})
+    db.jadwalDosen.update({"nip" : p2Nip},{"$set" :{
+    k : kosong
+    }})
+
+    #pencarian ruangan
+
+    waktu = [kMhs[1],kMhs[2]]
+    dataR = db.ruangan.find_one({"waktu" : waktu})
+    r = dataR.get('ruangan')
+    new = []
+    for i in r:
+        new.append(i.replace("-", result[0].get('ruangan')))
+    
+    db.ruangan.update({"waktu" : waktu}, 
+    {"$set" : { "ruangan" : new}})
 
     hasil = db.jadwal.remove({"nim" : id, "status" : status})
     return render_template('msg.html', my_string="Jadwal Terlaksana!", title="Terlaksana")
@@ -395,12 +459,15 @@ def jadwalUlang(id,status):
 
     dsbingNama=result[0].get('dosbing')
     kDsb=result[0].get('Kdosbing')
+    dNip=result[0].get('dosbingNIP')
 
     p1Nama=result[0].get('p1')
     kp1=result[0].get('Kp1')
+    p1Nip=result[0].get('p1NIP')
 
     p2Nama=result[0].get('p2')
     kp2=result[0].get('Kp2')
+    p2Nip=result[0].get('p2NIP')
 
     db.dataMhs.update({"nama" : mhsNama},
     {"$set" : {
@@ -422,9 +489,37 @@ def jadwalUlang(id,status):
     k : kp2
     }})
 
+    kosong = ""
+    db.jadwalMhs.update({"nim" : id},
+    {"$set" : {
+    k : kosong
+    }})
+    db.jadwalDosen.update({"nip" : dNip},{"$set" :{
+    k : kosong
+    }})
+    db.jadwalDosen.update({"nip" : p1Nip},{"$set" :{
+    k : kosong
+    }})
+    db.jadwalDosen.update({"nip" : p2Nip},{"$set" :{
+    k : kosong
+    }})
+
+
+    #pencarian ruangan
+
+    waktu = [kMhs[1],kMhs[2]]
+    dataR = db.ruangan.find_one({"waktu" : waktu})
+    r = dataR.get('ruangan')
+    new = []
+    for i in r:
+        new.append(i.replace("-", result[0].get('ruangan')))
+    
+    db.ruangan.update({"waktu" : waktu}, 
+    {"$set" : { "ruangan" : new}})
+
+
     hasil = db.jadwal.remove({"nim" : id, "status" : status})
     return redirect('/rancang')
-
 
 @app.route('/populasi')
 def populasi():
@@ -442,7 +537,6 @@ def ruangan():
     for i in data:
         ruangan.append(i)
     return render_template('ruangan.html',title="Ruangan", data=ruangan)
-
 
 @app.route("/dosentampil/<string:id>")
 def dosentampil(id):
@@ -516,7 +610,6 @@ def dosenReset(id):
 
     return redirect('/rancang')
 
-
 @app.route("/mhstampil/<string:id>")
 def mhstampil(id):
     data = db.dataMhs.find_one({'_id': ObjectId(id)})
@@ -528,6 +621,10 @@ def mhstampil(id):
         hasil[i+1]= data_2.get(str(i+1))
     return render_template('mhsTampil.html',title="Data Mahasiswa", data_2=hasil, data=data, my_string="")
 
+@app.route("/bantuan")
+def bantuan():
+
+    return render_template('bantuan.html',title="Bantuan dan Info", my_string="")
 
 if __name__ == '__main__':
     app.run(debug=True)

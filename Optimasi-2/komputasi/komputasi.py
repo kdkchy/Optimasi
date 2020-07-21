@@ -106,8 +106,8 @@ def makeData():
                     f = 1/(a + hx + 1)
                     if f >= 0.8 :
                         # sama.append(my_list[data])
-                        print(my_list[data])
-                        print("Generasi {}".format(num))
+                        # print(my_list[data])
+                        # print("Generasi {}".format(num))
                         db.komputasi.insert({'Gen' : num, 'mhs': my_list[data][0], 'dosbing' : my_list[data][1], 'p1' : my_list[data][2], 'p2' : my_list[data][3], 'Hx' : hx, 'yz' : YZ, 'YZ' : YZprod, 'a' : a, 'fitnes' : f})
                     populasi.append({'Gen' : num, 'mhs': my_list[data][0], 'dosbing' : my_list[data][1], 'p1' : my_list[data][2], 'p2' : my_list[data][3], 'Hx' : hx, 'yz' : YZ, 'YZ' : YZprod, 'a' : a, 'fitnes' : f})
                 num = num + 1

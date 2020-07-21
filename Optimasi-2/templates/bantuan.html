@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block page %}{{title}}{% endblock %}
+{% block content %}
+
+<h3>{{my_string}}</h3>
+
+<p>Selamat datang di web Optimasi Penjadwalan Pra Skripsi dan Skripsi Menggunakan Algoritma Genetika. </p>
+<p>Berikut adalah tata cara penggunaan dari sistem ini</p>
+
+<br>
+<h3>A. Menu Navigasi</h3>
+<img src={{ url_for('static', filename='navigasi.PNG') }}>
+<br>
+<br>
+<p>Terdapat 6 menu navigasi, diantaranya :</p>
+<table>
+    <tr>
+        <td>Home</td>
+        <td>  </td>
+        <td>//Menu ini adalah <i>landing page</i> dari aplikasi ini, dan juga menampilan seluruh jadwal Ujian Pra Skripsi dan Skripsi yang sudah terjadwal.</td>
+    </tr>
+    <tr>
+        <td>Perencanaan Jadwal</td>
+        <td>  </td>
+        <td>//Menu ini akan menampilkan seluruh daftar Mahasiswa yang mengambil Pra dan Skripsi, serta Dosen yang menjadi Pembimbing dan yang akan menjadi Narasumber</td>
+    </tr>
+    <tr>
+        <td>Input Mahasiswa</td>
+        <td>  </td>
+        <td>//Aplikasi ini dapat menambahkan Mahasiswa lagi dengan menggunakan menu ini, fitur ini berfungsi untuk menambah Mahasiswa yang akan dijadwalkan ujian.</td>
+    </tr>
+    <tr>
+        <td>Input Dosen</td>
+        <td>  </td>
+        <td>//Berguna untuk menambah dosen yang akan menjadi Pembimbing ataupun Narasumber</td>
+    </tr>
+    <tr>
+        <td>Ruangan</td>
+        <td>  </td>
+        <td>//Menampilkan ruangan kosong yang akan dijadikan ruangan Ujian.</td>
+    </tr>
+</table>
+<br>
+<h3>B. Perencanaan Jadwal</h3>
+<img src={{ url_for('static', filename='perancangan.PNG') }}>
+<br>
+<br>
+<p>Terdapat 3 tab navigasi untuk menampilkan Mahasiswa, Pembimbing, dan Penguji/Narasumber, dan satu buah tombol untuk memulai perancangan</p>
+
+    <table>
+        <tr><td>Tatacara perancangan adalah :</td></tr>
+        <tr><td>//Pada navigasi Mahasiswa pilih 1 Mahasiswa yang akan dibuatkan jadwal dengan mencentang <i>checkbox</i> disebelah kanan</td></tr>
+        <tr><td>.</td></tr>
+        <tr><td><img src={{ url_for('static', filename='mhs.PNG') }}></td></tr>
+        <tr><td>.</td></tr>
+        <tr><td>//Selanjutnya beralih pada tab Pembimbing, lalu pilih 1 Dosen untuk dijadikan pembimbing dengan mencentang <i>checkbox</i> disebelah kanan</td></tr>
+        <tr><td>//Jika sudah, selanjutnya menuju pada tab Penguji yang dimana harus <strong>memilih 2</strong> Dosen Pembimbing, jika hanya terdapat 1 Penguji, maka pilih A-None sebagai penggantinya</td></tr>
+        <tr><td>//Karena pada aplikasi ini memerlukan persis 4 objek untuk dikomputasi, 1 Mahasiswa, 1 Dosen Pembimbing, dan 2 Penguji</td></tr>
+        <tr><td>//Jika sudah maka klik <strong>Rancang Slur!</strong> untuk memulai komputasi dan sistem akan melakukan perhitungan untuk mencari jadwal terbaik</td></tr>
+        <tr></tr>
+        <tr><td>//Ketika sistem sudah selesai menghitung maka akan muncul setidaknya 5 jadwal terbaik yang akan siap untuk dijadwalkan</td></tr>
+        <tr><td>.</td></tr>
+        <tr><td></td></tr>
+        <tr><td><img src={{ url_for('static', filename='jadwal.PNG') }} style="width: 1200px;"></td></tr>
+        <tr><td>.</td></tr>
+        <tr><td>//Pilih slah satu jadwal dari kelima jadwal tersebut, lalu pilih ruangan, masukkan judul Pra atau Skripsi, tentukan tanggal yang sesuai pada hari yang sudah ditentuakan oleh sistem, lalu pilih status Pra atau Skripsi, lalu Rancang Slur!</td></tr>
+        <tr><td>//Dan Jadwal akan muncul pada Home</td></tr>
+    </table>
+
+    <hr>
+    <table>
+        <tr><td>Untuk info lebih lanjut:</td></tr>
+        <tr><td>Email : kdkchy@gmai.com</td></tr>
+        <tr><td>Github : /dummytarget</td></tr>
+    </table>
+
+
+
+{% endblock %}
