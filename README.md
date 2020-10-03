@@ -1,3 +1,5 @@
+# Optimasi-2 is the main project
+
 1. Panggil data mahasiswa, dosbing, penguji-1, penguji-2 (SUDAH)
 2. (Table - TEMP) Acak data mahasiswa, simpan dalam tabel. Acak data dosbing, update dan simpan dalam tabel. Acak data penguji-1 dan 2, update dan simpan dalam tabel (SUDAH)
 3. (Table - KOMPUTASI) Ambil data yang sudah diacak lalu hitung fitnessnya (SUDAH)
